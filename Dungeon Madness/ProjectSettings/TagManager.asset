@@ -48,6 +48,9 @@ TagManager:
   - name: Items
     uniqueID: 1983266307
     locked: 0
-  - name: Whisp
+  - name: Wisp
     uniqueID: 1735330131
+    locked: 0
+  - name: WispTop
+    uniqueID: 3371794483
     locked: 0

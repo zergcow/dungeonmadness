@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Floor
+    uniqueID: 1693022979
+    locked: 0
+  - name: Items
+    uniqueID: 1983266307
+    locked: 0
+  - name: Whisp
+    uniqueID: 1735330131
+    locked: 0

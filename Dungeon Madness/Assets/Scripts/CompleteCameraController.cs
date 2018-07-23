@@ -13,11 +13,7 @@ public class CompleteCameraController : MonoBehaviour {
 		//Calculate and store the offset value by getting the distance between the player's position and camera's position.
 		offset = transform.position - player.transform.position;
 	}
-
-    //trying to fix texture issues
-    void Update()
-    {
-    }
+    
 
     // LateUpdate is called after Update each frame
     void LateUpdate () 

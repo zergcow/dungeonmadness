@@ -113,53 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &62436764
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 356705352}
-    m_Modifications:
-    - target: {fileID: 4131530958288306, guid: ec466b672a801cd4dbae14cefae7251e, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131530958288306, guid: ec466b672a801cd4dbae14cefae7251e, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131530958288306, guid: ec466b672a801cd4dbae14cefae7251e, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131530958288306, guid: ec466b672a801cd4dbae14cefae7251e, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131530958288306, guid: ec466b672a801cd4dbae14cefae7251e, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131530958288306, guid: ec466b672a801cd4dbae14cefae7251e, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131530958288306, guid: ec466b672a801cd4dbae14cefae7251e, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4131530958288306, guid: ec466b672a801cd4dbae14cefae7251e, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ec466b672a801cd4dbae14cefae7251e, type: 2}
-  m_IsPrefabAsset: 0
---- !u!4 &62436765 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4131530958288306, guid: ec466b672a801cd4dbae14cefae7251e,
-    type: 2}
-  m_PrefabInternal: {fileID: 62436764}
 --- !u!1 &356705351
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,8 +140,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 62436765}
+  m_Children: []
   m_Father: {fileID: 1816063881}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -203,7 +155,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e864d4b03fcc4499e8f6c4492fac1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiles: []
+  floors:
+  - {fileID: 1902759450468278, guid: f2ff8650f1b2665419fe765a6ea18784, type: 2}
+  - {fileID: 1637062855172104, guid: 7552f0cf9da8fa44a9f475aca2be4f8f, type: 2}
+  rightWalls:
+  - {fileID: 1398222155038788, guid: 1771dcf9b9ca9164a96ae0bbb026a7cb, type: 2}
+  - {fileID: 1392855183628348, guid: 99bd138e140489d4bb5e47e26e330196, type: 2}
+  leftWalls:
+  - {fileID: 1865364611446060, guid: 4506e307992a9ae4ab2df4e2d3d4f462, type: 2}
+  - {fileID: 1956759310442780, guid: 083eaa8f62e903e46a0c5886f2e4638c, type: 2}
+  topWalls:
+  - {fileID: 1904918078954318, guid: 377052b9c67aa924ca8a1154ffc6dd5a, type: 2}
+  - {fileID: 1964293461480458, guid: f906a996f6747a64b9de0d452d8d78e6, type: 2}
+  bottomWalls:
+  - {fileID: 1463528731493736, guid: d489f5cc1a1ce054e93ccdc46b22ba79, type: 2}
+  - {fileID: 1265795538080518, guid: 92be888803aa6f140a63d96a5ff9a4ef, type: 2}
+  - {fileID: 1606334059818024, guid: bc463ba0973a2f44498bffec4ada0680, type: 2}
+  neCorner:
+  - {fileID: 1240724041748584, guid: b4a954dbdeae294438c82561a339cbcf, type: 2}
+  - {fileID: 1309621783382770, guid: 39457d019ce1f864d99b00da1b9dcec0, type: 2}
+  nwCorner:
+  - {fileID: 1366838985710538, guid: 3f8dbdf8ca1fd634fb08bd48893954d9, type: 2}
+  - {fileID: 1925945768483796, guid: e088553a8c418ca4bad92ec4caef7bac, type: 2}
+  seCorner:
+  - {fileID: 1895611417936464, guid: e41a93221dbdbc442b3a3487c73308cb, type: 2}
+  - {fileID: 1566352989807924, guid: bc4b28f9cd5cccb46b53fed120ef2779, type: 2}
+  swCorner:
+  - {fileID: 1260893966145526, guid: 350e465b7304eb1409280f6124ea7fe3, type: 2}
+  - {fileID: 1765305255897116, guid: 2798fe544f1089e458c069ba66dfe0b7, type: 2}
 --- !u!483693784 &356705354
 TilemapRenderer:
   m_ObjectHideFlags: 0

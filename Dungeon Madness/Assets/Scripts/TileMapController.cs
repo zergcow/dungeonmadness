@@ -19,7 +19,8 @@ public class TileMapController : MonoBehaviour {
 	void Start () {
         var tileMap = GetComponent<Tilemap>();
 
-        var floorTile = new Tile();
+        //var floorTile = new Tile(); // Zerg: trying to fix the warning on the editor
+        var floorTile = ScriptableObject.CreateInstance<Tile>();
         floorTile.gameObject = floors[0];
 
         tileMap.SetTile(new Vector3Int(0, 0, 0), floorTile);
@@ -29,5 +30,9 @@ public class TileMapController : MonoBehaviour {
         tileMap.SetTile(new Vector3Int(1, 1, 0), floorTile);
         tileMap.SetTile(new Vector3Int(-1, 0, 0), floorTile);
         tileMap.SetTile(new Vector3Int(-1, -1, 0), floorTile);
+        tileMap.SetTile(new Vector3Int(1, -1, 0), floorTile);
+        tileMap.SetTile(new Vector3Int(-1, 1, 0), floorTile);
+
+
     }
 }

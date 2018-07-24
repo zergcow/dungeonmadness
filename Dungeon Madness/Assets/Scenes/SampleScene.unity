@@ -113,6 +113,57 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &163949434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 163949436}
+  - component: {fileID: 163949435}
+  m_Layer: 0
+  m_Name: Globals
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!114 &163949435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 163949434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bac22302fe449c4daea47a2a798b169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floors:
+  - {fileID: 1902759450468278, guid: f2ff8650f1b2665419fe765a6ea18784, type: 2}
+  - {fileID: 1637062855172104, guid: 7552f0cf9da8fa44a9f475aca2be4f8f, type: 2}
+  rightWalls: []
+  leftWalls: []
+  topWalls: []
+  bottomWalls: []
+  neCorner: []
+  nwCorner: []
+  seCorner: []
+  swCorner: []
+--- !u!4 &163949436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 163949434}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &356705351
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,25 +206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e864d4b03fcc4499e8f6c4492fac1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floors:
-  - {fileID: 1902759450468278, guid: f2ff8650f1b2665419fe765a6ea18784, type: 2}
-  - {fileID: 1637062855172104, guid: 7552f0cf9da8fa44a9f475aca2be4f8f, type: 2}
-  rightWalls:
-  - {fileID: 1398222155038788, guid: 1771dcf9b9ca9164a96ae0bbb026a7cb, type: 2}
-  leftWalls:
-  - {fileID: 1865364611446060, guid: 4506e307992a9ae4ab2df4e2d3d4f462, type: 2}
-  topWalls:
-  - {fileID: 1904918078954318, guid: 377052b9c67aa924ca8a1154ffc6dd5a, type: 2}
-  bottomWalls:
-  - {fileID: 1463528731493736, guid: d489f5cc1a1ce054e93ccdc46b22ba79, type: 2}
-  neCorner:
-  - {fileID: 1240724041748584, guid: b4a954dbdeae294438c82561a339cbcf, type: 2}
-  nwCorner:
-  - {fileID: 1366838985710538, guid: 3f8dbdf8ca1fd634fb08bd48893954d9, type: 2}
-  seCorner:
-  - {fileID: 1895611417936464, guid: e41a93221dbdbc442b3a3487c73308cb, type: 2}
-  swCorner:
-  - {fileID: 1260893966145526, guid: 350e465b7304eb1409280f6124ea7fe3, type: 2}
 --- !u!483693784 &356705354
 TilemapRenderer:
   m_ObjectHideFlags: 0

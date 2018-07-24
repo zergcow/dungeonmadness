@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class WallController : MonoBehaviour {
 
@@ -22,7 +23,11 @@ public class WallController : MonoBehaviour {
 
         if (hp <= 0)
         {
-            gameObject.SetActive(false);
+            var tilePos = gameObject.transform.position;
+            var tileMap = gameObject.GetComponentInParent<Tilemap>();
+            var floorTile = ScriptableObject.CreateInstance<Tile>();
+            //floorTile.gameObject = 
+            //tileMap.SetTile(tilePos, floorTile)
         }
             
     }

@@ -5,15 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class TileMapController : MonoBehaviour {
 
-    public GameObject[] floors;
-    public GameObject[] rightWalls;
-    public GameObject[] leftWalls;
-    public GameObject[] topWalls;
-    public GameObject[] bottomWalls;
-    public GameObject[] neCorner;
-    public GameObject[] nwCorner;
-    public GameObject[] seCorner;
-    public GameObject[] swCorner;
     private Tilemap tileMap;
 
 	// Use this for initialization
@@ -59,7 +50,7 @@ public class TileMapController : MonoBehaviour {
                     minY = tileY;
                 }
                 var floorTile = ScriptableObject.CreateInstance<Tile>();
-                floorTile.gameObject = floors[Random.Range(0, floors.Length)];
+                floorTile.gameObject = Globals.Floors[Random.Range(0, Globals.Floors.Length)];
                 tileMap.SetTile(new Vector3Int(tileX, tileY, 0), floorTile);
             }
         }
@@ -72,39 +63,39 @@ public class TileMapController : MonoBehaviour {
         for (int y = minY; y <= maxY; y++)
         {
             var rightTile = ScriptableObject.CreateInstance<Tile>();
-            rightTile.gameObject = rightWalls[Random.Range(0, rightWalls.Length)];
+            rightTile.gameObject = Globals.EWalls[Random.Range(0, Globals.EWalls.Length)];
             tileMap.SetTile(new Vector3Int(maxX, y, 0), rightTile);
         }
         for (int y = minY; y <= maxY; y++)
         {
             var leftTile = ScriptableObject.CreateInstance<Tile>();
-            leftTile.gameObject = leftWalls[Random.Range(0, leftWalls.Length)];
+            leftTile.gameObject = Globals.WWalls[Random.Range(0, Globals.WWalls.Length)];
             tileMap.SetTile(new Vector3Int(minX, y, 0), leftTile);
         }
         for (int x = minX; x <= maxX; x++)
         {
             var topTile = ScriptableObject.CreateInstance<Tile>();
-            topTile.gameObject = topWalls[Random.Range(0, topWalls.Length)];
+            topTile.gameObject = Globals.NWalls[Random.Range(0, Globals.NWalls.Length)];
             tileMap.SetTile(new Vector3Int(x, maxY, 0), topTile);
         }
         for (int x = minX; x <= maxX; x++)
         {
             var botTile = ScriptableObject.CreateInstance<Tile>();
-            botTile.gameObject = bottomWalls[Random.Range(0, bottomWalls.Length)];
+            botTile.gameObject = Globals.SWalls[Random.Range(0, Globals.SWalls.Length)];
             tileMap.SetTile(new Vector3Int(x, minY, 0), botTile);
         }
 
         var neTile = ScriptableObject.CreateInstance<Tile>();
-        neTile.gameObject = neCorner[Random.Range(0, neCorner.Length)];
+        neTile.gameObject = Globals.NECorner[Random.Range(0, Globals.NECorner.Length)];
         tileMap.SetTile(new Vector3Int(maxX, maxY, 0), neTile);
         var nwTile = ScriptableObject.CreateInstance<Tile>();
-        nwTile.gameObject = nwCorner[Random.Range(0, nwCorner.Length)];
+        nwTile.gameObject = Globals.NWCorner[Random.Range(0, Globals.NWCorner.Length)];
         tileMap.SetTile(new Vector3Int(minX, maxY, 0), nwTile);
         var seTile = ScriptableObject.CreateInstance<Tile>();
-        seTile.gameObject = seCorner[Random.Range(0, seCorner.Length)];
+        seTile.gameObject = Globals.SECorner[Random.Range(0, Globals.SECorner.Length)];
         tileMap.SetTile(new Vector3Int(maxX, minY, 0), seTile);
         var swTile = ScriptableObject.CreateInstance<Tile>();
-        swTile.gameObject = swCorner[Random.Range(0, swCorner.Length)];
+        swTile.gameObject = Globals.SWCorner[Random.Range(0, Globals.SWCorner.Length)];
         tileMap.SetTile(new Vector3Int(minX, minY, 0), swTile);
 
     }

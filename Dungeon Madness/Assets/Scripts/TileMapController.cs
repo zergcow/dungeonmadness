@@ -14,19 +14,33 @@ public class TileMapController : MonoBehaviour {
     public GameObject[] nwCorner;
     public GameObject[] seCorner;
     public GameObject[] swCorner;
+    private Tilemap tileMap;
 
 	// Use this for initialization
 	void Start () {
-        var tileMap = GetComponent<Tilemap>();
+        tileMap = GetComponent<Tilemap>();
 
         int roomHeight = 6;
         int roomWidth = 8;
-        int offsetX = -3;
-        int offsetY = -3;
+        int offsetX = -3; //set sw corner room start
+        int offsetY = -3; //set sw corner room start
         int maxX = offsetX;
         int maxY = offsetY;
         int minX = offsetX;
         int minY = offsetY;
+
+        CreateRoom(roomWidth, roomHeight, offsetX, offsetY, out maxX, out maxY, out minX, out minY);
+
+        CreateWallsForRoom(roomWidth, roomHeight, maxX, maxY, minX, minY);
+        
+    }
+
+    private void CreateRoom(int roomWidth, int roomHeight, int offsetX, int offsetY, out int maxX, out int maxY, out int minX, out int minY)
+    {
+        maxX = 0;
+        maxY = 0;
+        minX = 0;
+        minY = 0;
         for (int x = 0; x < roomWidth; x++)
         {
             int tileX = offsetX + x;
@@ -54,9 +68,48 @@ public class TileMapController : MonoBehaviour {
                 tileMap.SetTile(new Vector3Int(tileX, tileY, 0), floorTile);
             }
         }
-        var rightTile = ScriptableObject.CreateInstance<Tile>();
-        rightTile.gameObject = rightWalls[Random.Range(0, rightWalls.Length)];
+    }
 
-        
+    private void CreateWallsForRoom(int roomWidth, int roomHeight, int maxX, int maxY, int minX, int minY)
+    {
+
+        for (int y = minY; y <= maxY; y++)
+        {
+            var rightTile = ScriptableObject.CreateInstance<Tile>();
+            rightTile.gameObject = rightWalls[Random.Range(0, rightWalls.Length)];
+            tileMap.SetTile(new Vector3Int(maxX, y, 0), rightTile);
+        }
+        for (int y = minY; y <= maxY; y++)
+        {
+            var leftTile = ScriptableObject.CreateInstance<Tile>();
+            leftTile.gameObject = leftWalls[Random.Range(0, leftWalls.Length)];
+            tileMap.SetTile(new Vector3Int(minX, y, 0), leftTile);
+        }
+        for (int x = minX; x <= maxX; x++)
+        {
+            var topTile = ScriptableObject.CreateInstance<Tile>();
+            topTile.gameObject = topWalls[Random.Range(0, topWalls.Length)];
+            tileMap.SetTile(new Vector3Int(x, maxY, 0), topTile);
+        }
+        for (int x = minX; x <= maxX; x++)
+        {
+            var botTile = ScriptableObject.CreateInstance<Tile>();
+            botTile.gameObject = bottomWalls[Random.Range(0, bottomWalls.Length)];
+            tileMap.SetTile(new Vector3Int(x, minY, 0), botTile);
+        }
+
+        var neTile = ScriptableObject.CreateInstance<Tile>();
+        neTile.gameObject = neCorner[Random.Range(0, neCorner.Length)];
+        tileMap.SetTile(new Vector3Int(maxX, maxY, 0), neTile);
+        var nwTile = ScriptableObject.CreateInstance<Tile>();
+        nwTile.gameObject = nwCorner[Random.Range(0, nwCorner.Length)];
+        tileMap.SetTile(new Vector3Int(minX, maxY, 0), nwTile);
+        var seTile = ScriptableObject.CreateInstance<Tile>();
+        seTile.gameObject = seCorner[Random.Range(0, seCorner.Length)];
+        tileMap.SetTile(new Vector3Int(maxX, minY, 0), seTile);
+        var swTile = ScriptableObject.CreateInstance<Tile>();
+        swTile.gameObject = swCorner[Random.Range(0, swCorner.Length)];
+        tileMap.SetTile(new Vector3Int(minX, minY, 0), swTile);
+
     }
 }

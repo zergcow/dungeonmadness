@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61494636232020570}
   - component: {fileID: 114407053231547486}
   m_Layer: 0
-  m_Name: Wall3
+  m_Name: NECorner
   m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -143,14 +143,22 @@ MonoBehaviour:
   floors:
   - {fileID: 1902759450468278, guid: f2ff8650f1b2665419fe765a6ea18784, type: 2}
   - {fileID: 1637062855172104, guid: 7552f0cf9da8fa44a9f475aca2be4f8f, type: 2}
-  rightWalls: []
-  leftWalls: []
-  topWalls: []
-  bottomWalls: []
-  neCorner: []
-  nwCorner: []
-  seCorner: []
-  swCorner: []
+  eastWalls:
+  - {fileID: 1398222155038788, guid: 1771dcf9b9ca9164a96ae0bbb026a7cb, type: 2}
+  westWalls:
+  - {fileID: 1865364611446060, guid: 4506e307992a9ae4ab2df4e2d3d4f462, type: 2}
+  northWalls:
+  - {fileID: 1904918078954318, guid: 377052b9c67aa924ca8a1154ffc6dd5a, type: 2}
+  southWalls:
+  - {fileID: 1463528731493736, guid: d489f5cc1a1ce054e93ccdc46b22ba79, type: 2}
+  northEastCorner:
+  - {fileID: 1240724041748584, guid: b4a954dbdeae294438c82561a339cbcf, type: 2}
+  northWestCorner:
+  - {fileID: 1366838985710538, guid: 3f8dbdf8ca1fd634fb08bd48893954d9, type: 2}
+  southEastCorner:
+  - {fileID: 1895611417936464, guid: e41a93221dbdbc442b3a3487c73308cb, type: 2}
+  southWestCorner:
+  - {fileID: 1260893966145526, guid: 350e465b7304eb1409280f6124ea7fe3, type: 2}
 --- !u!4 &163949436
 Transform:
   m_ObjectHideFlags: 0

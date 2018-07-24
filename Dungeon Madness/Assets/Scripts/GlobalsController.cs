@@ -10,7 +10,7 @@ public class GlobalsController : MonoBehaviour {
     public GameObject[] northWalls;
     public GameObject[] southWalls;
     public GameObject[] northEastCorner;
-    public GameObject[] northwestCorner;
+    public GameObject[] northWestCorner;
     public GameObject[] southEastCorner;
     public GameObject[] southWestCorner;
 
@@ -22,7 +22,7 @@ public class GlobalsController : MonoBehaviour {
         Globals.NWalls = northWalls;
         Globals.SWalls = southWalls;
         Globals.NECorner = northEastCorner;
-        Globals.NWCorner = northwestCorner;
+        Globals.NWCorner = northWestCorner;
         Globals.SECorner = southEastCorner;
         Globals.SWCorner = southWestCorner;
     }

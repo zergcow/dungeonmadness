@@ -23,11 +23,12 @@ public class WallController : MonoBehaviour {
 
         if (hp <= 0)
         {
-            var tilePos = gameObject.transform.position;
+            var tilePos = new Vector3Int(Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.y), 0);
             var tileMap = gameObject.GetComponentInParent<Tilemap>();
             var floorTile = ScriptableObject.CreateInstance<Tile>();
-            //floorTile.gameObject = 
-            //tileMap.SetTile(tilePos, floorTile)
+            floorTile.gameObject = Globals.Floors[Random.Range(0, Globals.Floors.Length)];
+            tileMap.SetTile(tilePos, floorTile);
+
         }
             
     }

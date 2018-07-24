@@ -19,15 +19,44 @@ public class TileMapController : MonoBehaviour {
 	void Start () {
         var tileMap = GetComponent<Tilemap>();
 
-        var floorTile = new Tile();
-        floorTile.gameObject = floors[0];
+        int roomHeight = 6;
+        int roomWidth = 8;
+        int offsetX = -3;
+        int offsetY = -3;
+        int maxX = offsetX;
+        int maxY = offsetY;
+        int minX = offsetX;
+        int minY = offsetY;
+        for (int x = 0; x < roomWidth; x++)
+        {
+            int tileX = offsetX + x;
+            if (maxX < tileX)
+            {
+                maxX = tileX;
+            }
+            if (minX > tileX)
+            {
+                minX = tileX;
+            }
+            for (int y = 0; y < roomHeight; y++)
+            {
+                int tileY = offsetY + y;
+                if (maxY < tileY)
+                {
+                    maxY = tileY;
+                }
+                if (minY > tileY)
+                {
+                    minY = tileY;
+                }
+                var floorTile = ScriptableObject.CreateInstance<Tile>();
+                floorTile.gameObject = floors[Random.Range(0, floors.Length)];
+                tileMap.SetTile(new Vector3Int(tileX, tileY, 0), floorTile);
+            }
+        }
+        var rightTile = ScriptableObject.CreateInstance<Tile>();
+        rightTile.gameObject = rightWalls[Random.Range(0, rightWalls.Length)];
 
-        tileMap.SetTile(new Vector3Int(0, 0, 0), floorTile);
-        tileMap.SetTile(new Vector3Int(1, 0, 0), floorTile);
-        tileMap.SetTile(new Vector3Int(0, 1, 0), floorTile);
-        tileMap.SetTile(new Vector3Int(0, -1, 0), floorTile);
-        tileMap.SetTile(new Vector3Int(1, 1, 0), floorTile);
-        tileMap.SetTile(new Vector3Int(-1, 0, 0), floorTile);
-        tileMap.SetTile(new Vector3Int(-1, -1, 0), floorTile);
+        
     }
 }

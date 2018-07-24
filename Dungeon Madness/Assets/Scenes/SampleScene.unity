@@ -159,6 +159,14 @@ MonoBehaviour:
   - {fileID: 1895611417936464, guid: e41a93221dbdbc442b3a3487c73308cb, type: 2}
   southWestCorner:
   - {fileID: 1260893966145526, guid: 350e465b7304eb1409280f6124ea7fe3, type: 2}
+  northEastInverse:
+  - {fileID: 1887418337486036, guid: 0f6084271d7b6a94fa90b204f4d3898a, type: 2}
+  northWestInverse:
+  - {fileID: 1052192084264540, guid: 0bbc50a628e505b489da158d88c38629, type: 2}
+  southEastInverse:
+  - {fileID: 1512184674517394, guid: ec466b672a801cd4dbae14cefae7251e, type: 2}
+  southWestInverse:
+  - {fileID: 1825595595879742, guid: 01c7a7028f9e05a489f76ae9bfed7436, type: 2}
 --- !u!4 &163949436
 Transform:
   m_ObjectHideFlags: 0

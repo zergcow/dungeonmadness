@@ -51,6 +51,7 @@ public class TileMapController : MonoBehaviour {
                 }
                 var floorTile = ScriptableObject.CreateInstance<Tile>();
                 floorTile.gameObject = Globals.Floors[Random.Range(0, Globals.Floors.Length)];
+                floorTile.name = "floor";
                 tileMap.SetTile(new Vector3Int(tileX, tileY, 0), floorTile);
             }
         }
@@ -62,40 +63,48 @@ public class TileMapController : MonoBehaviour {
 
         for (int y = minY; y <= maxY; y++)
         {
-            var rightTile = ScriptableObject.CreateInstance<Tile>();
-            rightTile.gameObject = Globals.EWalls[Random.Range(0, Globals.EWalls.Length)];
-            tileMap.SetTile(new Vector3Int(maxX, y, 0), rightTile);
+            var eastTile = ScriptableObject.CreateInstance<Tile>();
+            eastTile.gameObject = Globals.EWalls[Random.Range(0, Globals.EWalls.Length)];
+            eastTile.name = "eastWall";
+            tileMap.SetTile(new Vector3Int(maxX, y, 0), eastTile);
         }
         for (int y = minY; y <= maxY; y++)
         {
-            var leftTile = ScriptableObject.CreateInstance<Tile>();
-            leftTile.gameObject = Globals.WWalls[Random.Range(0, Globals.WWalls.Length)];
-            tileMap.SetTile(new Vector3Int(minX, y, 0), leftTile);
+            var westTile = ScriptableObject.CreateInstance<Tile>();
+            westTile.gameObject = Globals.WWalls[Random.Range(0, Globals.WWalls.Length)];
+            westTile.name = "westWall";
+            tileMap.SetTile(new Vector3Int(minX, y, 0), westTile);
         }
         for (int x = minX; x <= maxX; x++)
         {
-            var topTile = ScriptableObject.CreateInstance<Tile>();
-            topTile.gameObject = Globals.NWalls[Random.Range(0, Globals.NWalls.Length)];
-            tileMap.SetTile(new Vector3Int(x, maxY, 0), topTile);
+            var northTile = ScriptableObject.CreateInstance<Tile>();
+            northTile.gameObject = Globals.NWalls[Random.Range(0, Globals.NWalls.Length)];
+            northTile.name = "northWall";
+            tileMap.SetTile(new Vector3Int(x, maxY, 0), northTile);
         }
         for (int x = minX; x <= maxX; x++)
         {
-            var botTile = ScriptableObject.CreateInstance<Tile>();
-            botTile.gameObject = Globals.SWalls[Random.Range(0, Globals.SWalls.Length)];
-            tileMap.SetTile(new Vector3Int(x, minY, 0), botTile);
+            var southTile = ScriptableObject.CreateInstance<Tile>();
+            southTile.gameObject = Globals.SWalls[Random.Range(0, Globals.SWalls.Length)];
+            southTile.name = "southWall";
+            tileMap.SetTile(new Vector3Int(x, minY, 0), southTile);
         }
 
         var neTile = ScriptableObject.CreateInstance<Tile>();
         neTile.gameObject = Globals.NECorner[Random.Range(0, Globals.NECorner.Length)];
+        neTile.name = "northEastWall";
         tileMap.SetTile(new Vector3Int(maxX, maxY, 0), neTile);
         var nwTile = ScriptableObject.CreateInstance<Tile>();
         nwTile.gameObject = Globals.NWCorner[Random.Range(0, Globals.NWCorner.Length)];
+        nwTile.name = "northWestWall";
         tileMap.SetTile(new Vector3Int(minX, maxY, 0), nwTile);
         var seTile = ScriptableObject.CreateInstance<Tile>();
         seTile.gameObject = Globals.SECorner[Random.Range(0, Globals.SECorner.Length)];
+        seTile.name = "southEastWall";
         tileMap.SetTile(new Vector3Int(maxX, minY, 0), seTile);
         var swTile = ScriptableObject.CreateInstance<Tile>();
         swTile.gameObject = Globals.SWCorner[Random.Range(0, Globals.SWCorner.Length)];
+        swTile.name = "southWestWall";
         tileMap.SetTile(new Vector3Int(minX, minY, 0), swTile);
 
     }

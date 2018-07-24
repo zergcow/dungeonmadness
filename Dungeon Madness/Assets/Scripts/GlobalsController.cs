@@ -13,7 +13,10 @@ public class GlobalsController : MonoBehaviour {
     public GameObject[] northWestCorner;
     public GameObject[] southEastCorner;
     public GameObject[] southWestCorner;
-
+    public GameObject[] northEastInverse;
+    public GameObject[] northWestInverse;
+    public GameObject[] southEastInverse;
+    public GameObject[] southWestInverse;
     void Awake()
     {
         Globals.Floors = floors;
@@ -25,5 +28,9 @@ public class GlobalsController : MonoBehaviour {
         Globals.NWCorner = northWestCorner;
         Globals.SECorner = southEastCorner;
         Globals.SWCorner = southWestCorner;
+        Globals.NEInverse = northEastInverse;
+        Globals.NWInverse = northWestInverse;
+        Globals.SEInverse = southEastInverse;
+        Globals.SWInverse = southWestInverse;
     }
 }

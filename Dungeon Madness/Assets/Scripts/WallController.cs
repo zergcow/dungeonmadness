@@ -23,13 +23,40 @@ public class WallController : MonoBehaviour {
 
         if (hp <= 0)
         {
-            var tilePos = new Vector3Int(Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.y), 0);
+            var tilePosX = Mathf.RoundToInt(gameObject.transform.position.x);
+            var tilePosY = Mathf.RoundToInt(gameObject.transform.position.y);
+            var tilePos = new Vector3Int(tilePosX, tilePosY, 0);
             var tileMap = gameObject.GetComponentInParent<Tilemap>();
             var floorTile = ScriptableObject.CreateInstance<Tile>();
             floorTile.gameObject = Globals.Floors[Random.Range(0, Globals.Floors.Length)];
             tileMap.SetTile(tilePos, floorTile);
 
+            var westTileCur = tileMap.GetTile(new Vector3Int(tilePosX - 1, tilePosY, 0));
+            if (westTileCur == null)
+            {
+
+            }
+            else if (westTileCur.name != "floor")
+            {
+
+            }
+            var eastTileCur = tileMap.GetTile(new Vector3Int(tilePosX + 1, tilePosY, 0));
+            if (eastTileCur == null)
+            {
+
+                var eastTile = ScriptableObject.CreateInstance<Tile>();
+                eastTile.gameObject = Globals.EWalls[Random.Range(0, Globals.EWalls.Length)];
+                tileMap.SetTile(new Vector3Int(tilePosX + 1, tilePosY, 0), eastTile);
+            }
+            else if (eastTileCur.name != "floor")
+            {
+                
+            }
+            var southTileCur = tileMap.GetTile(new Vector3Int(tilePosX, tilePosY - 1, 0));
+
+            var northTileCur = tileMap.GetTile(new Vector3Int(tilePosX, tilePosY + 1, 0));
+
         }
-            
+
     }
 }

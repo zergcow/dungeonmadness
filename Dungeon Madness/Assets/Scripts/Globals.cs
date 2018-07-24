@@ -13,4 +13,8 @@ static class Globals {
     public static GameObject[] NWCorner;
     public static GameObject[] SECorner;
     public static GameObject[] SWCorner;
+    public static GameObject[] NEInverse;
+    public static GameObject[] NWInverse;
+    public static GameObject[] SEInverse;
+    public static GameObject[] SWInverse;
 }

@@ -24,23 +24,18 @@ public class TileMapController : MonoBehaviour {
         int roomWidth = 8;
         int offsetX = -3; //set sw corner room start
         int offsetY = -3; //set sw corner room start
+
+        CreateRoom(roomWidth, roomHeight, offsetX, offsetY);
+
+        
+    }
+
+    private void CreateRoom(int roomWidth, int roomHeight, int offsetX, int offsetY)
+    {
         int maxX = offsetX;
         int maxY = offsetY;
         int minX = offsetX;
         int minY = offsetY;
-
-        CreateRoom(roomWidth, roomHeight, offsetX, offsetY, out maxX, out maxY, out minX, out minY);
-
-        CreateWallsForRoom(roomWidth, roomHeight, maxX, maxY, minX, minY);
-        
-    }
-
-    private void CreateRoom(int roomWidth, int roomHeight, int offsetX, int offsetY, out int maxX, out int maxY, out int minX, out int minY)
-    {
-        maxX = 0;
-        maxY = 0;
-        minX = 0;
-        minY = 0;
         for (int x = 0; x < roomWidth; x++)
         {
             int tileX = offsetX + x;
@@ -68,6 +63,7 @@ public class TileMapController : MonoBehaviour {
                 tileMap.SetTile(new Vector3Int(tileX, tileY, 0), floorTile);
             }
         }
+        CreateWallsForRoom(roomWidth, roomHeight, maxX, maxY, minX, minY);
     }
 
     private void CreateWallsForRoom(int roomWidth, int roomHeight, int maxX, int maxY, int minX, int minY)

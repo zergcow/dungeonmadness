@@ -12,7 +12,10 @@ public class WallController : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
 		
 	}
-	
+    private void OnMouseDown()
+    {
+        DamageWall(1);
+    }
     public void DamageWall(int loss)
     {
         hp -= loss;

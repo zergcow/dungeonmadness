@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4122478124337538}
   - component: {fileID: 212443669365632698}
   - component: {fileID: 61408272629124760}
+  - component: {fileID: 114515962402589962}
   m_Layer: 0
   m_Name: Wall16
   m_TagString: Walls
@@ -66,6 +67,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114515962402589962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1606334059818024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670a45f5294d69049ad5ac333bbf25a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmgSprite: {fileID: 0}
+  hp: 5
 --- !u!212 &212443669365632698
 SpriteRenderer:
   m_ObjectHideFlags: 1

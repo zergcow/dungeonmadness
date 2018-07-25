@@ -29,7 +29,7 @@ public class WallController : MonoBehaviour {
             var tilePos = new Vector3Int(tilePosX, tilePosY, 0);
             tileMap = gameObject.GetComponentInParent<Tilemap>();
             var floorTile = ScriptableObject.CreateInstance<Tile>();
-            floorTile.gameObject = Globals.Floors[Random.Range(0, Globals.Floors.Length)];
+            //floorTile.gameObject = Globals.Floors[Random.Range(0, Globals.Floors.Length)];
             tileMap.SetTile(tilePos, floorTile);
 
             for (int x = -1; x <= 1; x++)
@@ -59,12 +59,14 @@ public class WallController : MonoBehaviour {
         if (dirTileCur == null)
         {
             string newName = "";
+            /*
             GameObject[] dirWalls = Globals.GetDirectionName(offsetX, offsetY, out newName);
 
             var newTile = ScriptableObject.CreateInstance<Tile>();
             newTile.gameObject = dirWalls[Random.Range(0, dirWalls.Length)];
             newTile.name = newName;
             tileMap.SetTile(new Vector3Int(tilePosX + offsetX, tilePosY + offsetY, 0), newTile);
+            */
         }
     }
 

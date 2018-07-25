@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212496189378181708}
   - component: {fileID: 61907729617163998}
   m_Layer: 0
-  m_Name: FullTile
+  m_Name: 0T
   m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

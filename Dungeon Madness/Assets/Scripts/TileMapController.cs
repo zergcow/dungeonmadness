@@ -50,7 +50,7 @@ public class TileMapController : MonoBehaviour {
                     minY = tileY;
                 }
                 var floorTile = ScriptableObject.CreateInstance<Tile>();
-                floorTile.gameObject = Globals.Floors[Random.Range(0, Globals.Floors.Length)];
+                floorTile.gameObject = Globals.prefab_8F[Random.Range(0, Globals.prefab_8F.Length)];
                 floorTile.name = "floor";
                 tileMap.SetTile(new Vector3Int(tileX, tileY, 0), floorTile);
             }
@@ -64,10 +64,16 @@ public class TileMapController : MonoBehaviour {
         for (int y = minY; y <= maxY; y++)
         {
             var eastTile = ScriptableObject.CreateInstance<Tile>();
-            eastTile.gameObject = Globals.EWalls[Random.Range(0, Globals.EWalls.Length)];
-            eastTile.name = "eastWall";
+            
+            GameObject prefab = Globals.prefab_4W[Random.Range(0, Globals.prefab_4W.Length)];
+            var sprite = prefab.GetComponent<SpriteRenderer>();
+            sprite.transform.localRotation = Quaternion.Euler(0, 90, 0);
+            sprite.flipX = true;
+            eastTile.gameObject = prefab;
+            eastTile.name = "east4W";
             tileMap.SetTile(new Vector3Int(maxX, y, 0), eastTile);
         }
+        /*
         for (int y = minY; y <= maxY; y++)
         {
             var westTile = ScriptableObject.CreateInstance<Tile>();
@@ -106,6 +112,6 @@ public class TileMapController : MonoBehaviour {
         swTile.gameObject = Globals.SWCorner[Random.Range(0, Globals.SWCorner.Length)];
         swTile.name = "southWestWall";
         tileMap.SetTile(new Vector3Int(minX, minY, 0), swTile);
-
+        */
     }
 }

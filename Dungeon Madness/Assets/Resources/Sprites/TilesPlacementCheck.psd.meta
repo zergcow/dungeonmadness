@@ -14,6 +14,7 @@ TextureImporter:
     21300018: TilesPlacementCheck_9
     21300020: TilesPlacementCheck_10
     21300022: TilesPlacementCheck_11
+    21300024: TilesPlacementCheck_12
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -110,7 +111,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5bd24fbe1c6fdae46867047b3b86c63b
+      spriteID: dbb18e2c41453ca4c8eee7116bcbdb4e
       vertices: []
       indices: 
       edges: []
@@ -130,7 +131,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbe7385fabd31b945abd1558c878506a
+      spriteID: 3a7679d4ae8b4554395cfa4b5c7f8155
       vertices: []
       indices: 
       edges: []
@@ -150,7 +151,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d55824068abacef46ad8832043f6dc7d
+      spriteID: f2662b8f6efed424fbce2b17b316a302
       vertices: []
       indices: 
       edges: []
@@ -170,7 +171,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a8d5fbb2a380de4badbe343e007917a
+      spriteID: 890336bf40e21f844a82d94fb539e74b
       vertices: []
       indices: 
       edges: []
@@ -190,7 +191,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e1bd86725706c643ba4cf91192ef72b
+      spriteID: addcfeb39ede16343b7dba5606d268b6
       vertices: []
       indices: 
       edges: []
@@ -210,13 +211,33 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9dcf9cc5620be9c43ae3f8a2f1da75dd
+      spriteID: 2b7ecc1b90dc15d44a14963e797682eb
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
       name: TilesPlacementCheck_6
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04c303e49cc93374d80c62f3e002b8e2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilesPlacementCheck_7
       rect:
         serializedVersion: 2
         x: 384
@@ -230,13 +251,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0d255e61f47caf4db067d0141fdbfb8
+      spriteID: e9468839779049346882115f5a8842db
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TilesPlacementCheck_7
+      name: TilesPlacementCheck_8
       rect:
         serializedVersion: 2
         x: 0
@@ -250,13 +271,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 238e0cdd77b19ef43ad5506ddfb3c882
+      spriteID: 4e983d674cc1bbe4aa1cefd9b1d91f48
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TilesPlacementCheck_8
+      name: TilesPlacementCheck_9
       rect:
         serializedVersion: 2
         x: 128
@@ -270,13 +291,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 279838734df77974aa606365bfd9ef92
+      spriteID: 7bfcacff750fdc345a9937ce02966cdd
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TilesPlacementCheck_9
+      name: TilesPlacementCheck_10
       rect:
         serializedVersion: 2
         x: 384
@@ -290,13 +311,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: becfb19e4a145df4686b652a4240fa91
+      spriteID: 47e81361e10e0584ba9c2b67af926d3d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TilesPlacementCheck_10
+      name: TilesPlacementCheck_11
       rect:
         serializedVersion: 2
         x: 0
@@ -310,13 +331,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7683230f089e2814ea9bd18423add0f5
+      spriteID: 228ed1c8774931648b9035e86e1b5227
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TilesPlacementCheck_11
+      name: TilesPlacementCheck_12
       rect:
         serializedVersion: 2
         x: 128
@@ -330,7 +351,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85b3e8cc3d690684c9ab4955751962fd
+      spriteID: 3272146208e045540986d97b4c0a1542
       vertices: []
       indices: 
       edges: []

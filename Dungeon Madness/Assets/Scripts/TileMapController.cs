@@ -51,7 +51,7 @@ public class TileMapController : MonoBehaviour {
                 }
                 var floorTile = ScriptableObject.CreateInstance<Tile>();
                 floorTile.gameObject = Globals.prefab_8F[Random.Range(0, Globals.prefab_8F.Length)];
-                floorTile.name = "floor";
+                floorTile.name = "8F(Clone)";
                 tileMap.SetTile(new Vector3Int(tileX, tileY, 0), floorTile);
             }
         }
@@ -66,11 +66,7 @@ public class TileMapController : MonoBehaviour {
             var eastTile = ScriptableObject.CreateInstance<Tile>();
             
             GameObject prefab = Globals.prefab_4W[Random.Range(0, Globals.prefab_4W.Length)];
-            var sprite = prefab.GetComponent<SpriteRenderer>();
-            sprite.transform.localRotation = Quaternion.Euler(0, 90, 0);
-            sprite.flipX = true;
             eastTile.gameObject = prefab;
-            eastTile.name = "east4W";
             tileMap.SetTile(new Vector3Int(maxX, y, 0), eastTile);
         }
         /*

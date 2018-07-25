@@ -12,8 +12,20 @@ public class WallController : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         spriteRenderer = GetComponent<SpriteRenderer>();
-		
-	}
+    }
+    void Start()
+    {
+        if (name.Contains("4W"))
+        {
+            tileMap = gameObject.GetComponentInParent<Tilemap>();
+            string west = CheckTileInDirection(Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.y), -1, 0);
+            if (west == "8F")
+            {
+                transform.Rotate(new Vector3(0f, 0, -90f));
+            }
+            Debug.Log(west);
+        }
+    }
     private void OnMouseDown()
     {
         DamageWall(1);
@@ -29,7 +41,7 @@ public class WallController : MonoBehaviour {
             var tilePos = new Vector3Int(tilePosX, tilePosY, 0);
             tileMap = gameObject.GetComponentInParent<Tilemap>();
             var floorTile = ScriptableObject.CreateInstance<Tile>();
-            //floorTile.gameObject = Globals.Floors[Random.Range(0, Globals.Floors.Length)];
+            floorTile.gameObject = Globals.prefab_4WD[Random.Range(0, Globals.prefab_4WD.Length)];
             tileMap.SetTile(tilePos, floorTile);
 
             for (int x = -1; x <= 1; x++)
@@ -43,22 +55,25 @@ public class WallController : MonoBehaviour {
 
     }
 
-    private void CheckTileInDirection(int tilePosX, int tilePosY, int offsetX, int offsetY)
+    private string CheckTileInDirection(int tilePosX, int tilePosY, int offsetX, int offsetY)
     {
         //prevent infinite loop
         if (offsetX > 1)
-            return;
+            return "";
         if (offsetY > 1)
-            return;
+            return "";
         if (offsetX < -1)
-            return;
+            return "";
         if (offsetY < -1)
-            return;
+            return "";
 
         var dirTileCur = tileMap.GetTile(new Vector3Int(tilePosX + offsetX, tilePosY + offsetY, 0));
+        if (dirTileCur.name == "8F(Clone)")
+        {
+            return "8F";
+        }
         if (dirTileCur == null)
         {
-            string newName = "";
             /*
             GameObject[] dirWalls = Globals.GetDirectionName(offsetX, offsetY, out newName);
 
@@ -68,6 +83,7 @@ public class WallController : MonoBehaviour {
             tileMap.SetTile(new Vector3Int(tilePosX + offsetX, tilePosY + offsetY, 0), newTile);
             */
         }
+        return "";
     }
 
 

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4095084763719134}
   - component: {fileID: 212536203079177114}
   - component: {fileID: 60580591781049206}
+  - component: {fileID: 114627796952684480}
   m_Layer: 0
   m_Name: 4WD
   m_TagString: Untagged
@@ -69,6 +70,19 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.5}
       - {x: 0.016260386, y: 0.024311244}
       - {x: 0.5, y: 0.5}
+--- !u!114 &114627796952684480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1447836839162014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670a45f5294d69049ad5ac333bbf25a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmgSprite: {fileID: 0}
+  hp: 5
 --- !u!212 &212536203079177114
 SpriteRenderer:
   m_ObjectHideFlags: 1

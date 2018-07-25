@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4956196960164034}
   - component: {fileID: 212255377966946356}
   - component: {fileID: 60060738873067192}
+  - component: {fileID: 114621618986511056}
   m_Layer: 0
   m_Name: 4ACIC
   m_TagString: Untagged
@@ -73,6 +74,19 @@ PolygonCollider2D:
       - {x: 0.5, y: -0.5}
       - {x: 0.49783307, y: 0.24570131}
       - {x: 0.24846333, y: 0.24649811}
+--- !u!114 &114621618986511056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1251461895196642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670a45f5294d69049ad5ac333bbf25a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmgSprite: {fileID: 0}
+  hp: 5
 --- !u!212 &212255377966946356
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -51,7 +51,7 @@ public class TileMapController : MonoBehaviour {
                 }
                 var floorTile = ScriptableObject.CreateInstance<Tile>();
                 floorTile.gameObject = Globals.prefab_8F[Random.Range(0, Globals.prefab_8F.Length)];
-                floorTile.name = "floor";
+                floorTile.name = "8F(Clone)";
                 tileMap.SetTile(new Vector3Int(tileX, tileY, 0), floorTile);
             }
         }
@@ -64,31 +64,19 @@ public class TileMapController : MonoBehaviour {
         for (int y = minY; y <= maxY; y++)
         {
             var eastTile = ScriptableObject.CreateInstance<Tile>();
+            
             GameObject prefab = Globals.prefab_4W[Random.Range(0, Globals.prefab_4W.Length)];
-            //var sprite = prefab.GetComponent<SpriteRenderer>();
-            //sprite.transform.localRotation = Quaternion.Euler(0, 90, 0);
-            //sprite.flipX = true;
             eastTile.gameObject = prefab;
-            eastTile.name = "east4W";
             tileMap.SetTile(new Vector3Int(maxX, y, 0), eastTile);
-            //eastTile.transform.rotation = Quaternion.Euler(0, 90, 0);
-            //tilemap = GetComponent<Tilemap>();
-            Matrix4x4 matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, 0f), Vector3.forward * -90); 
-            tileMap.SetTransformMatrix(new Vector3Int(maxX, y, 0), matrix);
         }
+        /*
         for (int y = minY; y <= maxY; y++)
         {
             var westTile = ScriptableObject.CreateInstance<Tile>();
-            
-            GameObject prefab = Globals.prefab_4W[Random.Range(0, Globals.prefab_4W.Length)];
-            //var sprite = prefab.GetComponent<SpriteRenderer>();
-            //sprite.transform.localRotation = Quaternion.Euler(0, 90, 0);
-            //sprite.flipX = true;
-            westTile.gameObject = prefab;
-            westTile.name = "west4W";
+            westTile.gameObject = Globals.WWalls[Random.Range(0, Globals.WWalls.Length)];
+            westTile.name = "westWall";
             tileMap.SetTile(new Vector3Int(minX, y, 0), westTile);
         }
-        /*
         for (int x = minX; x <= maxX; x++)
         {
             var northTile = ScriptableObject.CreateInstance<Tile>();

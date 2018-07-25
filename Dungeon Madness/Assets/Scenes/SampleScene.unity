@@ -153,7 +153,7 @@ MonoBehaviour:
   prefab_4CIC:
   - {fileID: 1931940517268318, guid: 52acf07cf23e58d4fb80e5028aa10a9c, type: 2}
   prefab_4W:
-  - {fileID: 1416818067962408, guid: 3b2eb557e7260914e9fad3a4d1145dd2, type: 2}
+  - {fileID: 0}
   prefab_4WD:
   - {fileID: 1447836839162014, guid: e27b8f731738bae488ad1ebacdbeb579, type: 2}
   prefab_5OC:

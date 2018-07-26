@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Assets.Scripts;
 
 public class TileMapController : MonoBehaviour {
+    
+
 
     private Tilemap tileMap;
 
@@ -49,10 +52,26 @@ public class TileMapController : MonoBehaviour {
                 {
                     minY = tileY;
                 }
-                var floorTile = ScriptableObject.CreateInstance<Tile>();
-                floorTile.gameObject = Globals.prefab_8F[Random.Range(0, Globals.prefab_8F.Length)];
-                floorTile.name = "8F(Clone)";
-                tileMap.SetTile(new Vector3Int(tileX, tileY, 0), floorTile);
+                var newTile = ScriptableObject.CreateInstance<Tile>();
+                Vector3Int tilePos = new Vector3Int(tileX, tileY, 0);
+
+                newTile.gameObject = Globals.prefab_8F[Random.Range(0, Globals.prefab_8F.Length)];
+                tileMap.SetTile(tilePos, newTile);
+                var tileData = new TileInfo
+                {
+                    LocalPlace = tilePos,
+                    WorldLocation = tileMap.CellToWorld(tilePos),
+                    Rotation = new Vector3(0, 0, 0),
+                    TileBase = newTile,
+                    TilemapMember = tileMap,
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "Floor" }
+
+                };
+                if (GameData.GameTiles == null)
+                {
+                    GameData.GameTiles = new Dictionary<Vector3, TileInfo>();
+                }
+                GameData.GameTiles.Add(tilePos, tileData);
             }
         }
         CreateWallsForRoom(roomWidth, roomHeight, maxX, maxY, minX, minY);
@@ -63,11 +82,23 @@ public class TileMapController : MonoBehaviour {
 
         for (int y = minY; y <= maxY; y++)
         {
-            var eastTile = ScriptableObject.CreateInstance<Tile>();
+            var newTile = ScriptableObject.CreateInstance<Tile>();
             
             GameObject prefab = Globals.prefab_4W[Random.Range(0, Globals.prefab_4W.Length)];
-            eastTile.gameObject = prefab;
-            tileMap.SetTile(new Vector3Int(maxX, y, 0), eastTile);
+            newTile.gameObject = prefab;
+            Vector3Int tilePos = new Vector3Int(maxX, y, 0);
+            tileMap.SetTile(tilePos, newTile);
+            var tileData = new TileInfo
+            {
+                LocalPlace = tilePos,
+                WorldLocation = tileMap.CellToWorld(tilePos),
+                Rotation = new Vector3(0, -90, 0),
+                TileBase = newTile,
+                TilemapMember = tileMap,
+                BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "4W" }
+
+            };
+            GameData.GameTiles.Add(tilePos, tileData);
         }
         /*
         for (int y = minY; y <= maxY; y++)

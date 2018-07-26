@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Assets.Scripts;
 
 public class WallController : MonoBehaviour {
 
@@ -15,16 +16,10 @@ public class WallController : MonoBehaviour {
     }
     void Start()
     {
-        if (name.Contains("4W"))
-        {
-            tileMap = gameObject.GetComponentInParent<Tilemap>();
-            string west = CheckTileInDirection(Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.y), -1, 0);
-            if (west == "8F")
-            {
-                transform.Rotate(new Vector3(0f, 0, -90f));
-            }
-            Debug.Log(west);
-        }
+        tileMap = gameObject.GetComponentInParent<Tilemap>();
+        TileInfo curTile = GameData.GameTiles[transform.localPosition];
+        transform.Rotate(curTile.Rotation);
+
     }
     private void OnMouseDown()
     {

@@ -64,8 +64,9 @@ public class TileMapController : MonoBehaviour {
                     Rotation = new Vector3(0, 0, 0),
                     TileBase = newTile,
                     TilemapMember = tileMap,
+                    ResourceType = ResourceTypes.Iron,
                     BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "Floor" }
-
+                    
                 };
                 if (GameData.GameTiles == null)
                 {
@@ -102,6 +103,7 @@ public class TileMapController : MonoBehaviour {
                 Rotation = new Vector3(0, -90, 0),
                 TileBase = newTile,
                 TilemapMember = tileMap,
+                ResourceType = ResourceTypes.Iron,
                 BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "4W" }
 
             };

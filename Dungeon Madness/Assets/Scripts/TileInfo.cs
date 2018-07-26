@@ -20,5 +20,7 @@ namespace Assets.Scripts
         public BaseObjectData BaseObjectData { get; set; }
 
         public Vector3 Rotation { get; set; }
+
+        public ResourceTypes ResourceType { get; set; }
     }
 }

@@ -17,12 +17,30 @@ public class WallController : MonoBehaviour {
     void Start()
     {
         tileMap = gameObject.GetComponentInParent<Tilemap>();
-        TileInfo curTile = GameData.GameTiles[transform.localPosition];
+        if (GameData.GameTiles.ContainsKey(transform.localPosition))
+        {
+            TileInfo curTile = GameData.GameTiles[transform.localPosition];
 
-        Animator tileAni = GetComponent<Animator>();
-        tileAni.StartPlayback();
-        tileAni.playbackTime = 1f;
-        //transform.Rotate(curTile.Rotation);
+            Animator tileAni = gameObject.GetComponent<Animator>();
+            tileAni.StartPlayback();
+            float type = (float)curTile.ResourceType / (float)10;
+            tileAni.PlayInFixedTime(currentAnimationName(tileAni), 0, type);
+            //transform.Rotate(curTile.Rotation);
+        }
+    }
+
+    string currentAnimationName(Animator tileAni)
+    {
+        var currAnimName = "";
+        foreach (AnimationClip clip in tileAni.runtimeAnimatorController.animationClips)
+        {
+            if (tileAni.GetCurrentAnimatorStateInfo(0).IsName(clip.name))
+            {
+                currAnimName = clip.name.ToString();
+            }
+        }
+
+        return currAnimName;
 
     }
     private void OnMouseDown()

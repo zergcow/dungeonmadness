@@ -16,6 +16,12 @@ namespace Assets.Scripts
         Light = 5,
         Dark = 6
     }
+    enum ResourceTypes
+    {
+        Basic = 0,
+        Copper = 1,
+        Iron = 2
+    }
     static class GameData
     {
         public static Dictionary<Vector3, TileInfo> GameTiles;

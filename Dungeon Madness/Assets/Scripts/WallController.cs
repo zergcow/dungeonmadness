@@ -23,8 +23,7 @@ public class WallController : MonoBehaviour {
 
             Animator tileAni = gameObject.GetComponent<Animator>();
             tileAni.StartPlayback();
-            float type = (float)curTile.ResourceType / (float)10;
-            tileAni.PlayInFixedTime(currentAnimationName(tileAni), 0, type);
+            tileAni.PlayInFixedTime(currentAnimationName(tileAni), 0, (float)curTile.ResourceType / (float)10);
             //transform.Rotate(curTile.Rotation);
         }
     }

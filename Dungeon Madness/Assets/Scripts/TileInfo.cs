@@ -17,10 +17,12 @@ namespace Assets.Scripts
 
         public Tilemap TilemapMember { get; set; }
 
+        public String AnimatorName { get; set; }
+
         public BaseObjectData BaseObjectData { get; set; }
 
-        public Vector3 Rotation { get; set; }
+        public RotationStrings Rotation { get; set; }
 
-        public ResourceTypes ResourceType { get; set; }
+        public WallTypes ResourceType { get; set; }
     }
 }

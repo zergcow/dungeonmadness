@@ -61,11 +61,12 @@ public class TileMapController : MonoBehaviour {
                 {
                     LocalPlace = tilePos,
                     WorldLocation = tileMap.CellToWorld(tilePos),
-                    Rotation = new Vector3(0, 0, 0),
+                    Rotation = RotationStrings.Base,
                     TileBase = newTile,
                     TilemapMember = tileMap,
-                    ResourceType = ResourceTypes.Basic,
-                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "Floor" }
+                    ResourceType = WallTypes.Basic,
+                    AnimatorName = "8F",
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "8F" }
                     
                 };
                 if (GameData.GameTiles == null)
@@ -100,10 +101,11 @@ public class TileMapController : MonoBehaviour {
             {
                 LocalPlace = tilePos,
                 WorldLocation = tileMap.CellToWorld(tilePos),
-                Rotation = new Vector3(0, 0, -45),
+                Rotation = RotationStrings.CounterClockwise,
                 TileBase = newTile,
                 TilemapMember = tileMap,
-                ResourceType = ResourceTypes.Iron,
+                ResourceType = WallTypes.Basic,
+                AnimatorName = "4W",
                 BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "4W" }
 
             };

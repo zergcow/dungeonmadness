@@ -24,26 +24,11 @@ public class WallController : MonoBehaviour {
 
             Animator tileAni = gameObject.GetComponent<Animator>();
             tileAni.StartPlayback();
-            tileAni.PlayInFixedTime(currentAnimationName(tileAni), 0, (float)curTile.ResourceType / (float)10);
-            transform.SetPositionAndRotation(curTile.LocalPlace, Quaternion.Euler(curTile.Rotation));
-            gameObject.transform.Rotate(curTile.Rotation);
+            tileAni.PlayInFixedTime(curTile.AnimatorName, 0, (float)curTile.ResourceType / (float)10);
+            gameObject.transform.Rotate(GameData.RotationTypes[curTile.Rotation]);
         }
     }
 
-    string currentAnimationName(Animator tileAni)
-    {
-        var currAnimName = "";
-        foreach (AnimationClip clip in tileAni.runtimeAnimatorController.animationClips)
-        {
-            if (tileAni.GetCurrentAnimatorStateInfo(0).IsName(clip.name))
-            {
-                currAnimName = clip.name.ToString();
-            }
-        }
-
-        return currAnimName;
-
-    }
     private void OnMouseDown()
     {
         DamageWall(1);
@@ -54,21 +39,7 @@ public class WallController : MonoBehaviour {
 
         if (hp <= 0)
         {
-            var tilePosX = Mathf.RoundToInt(gameObject.transform.position.x);
-            var tilePosY = Mathf.RoundToInt(gameObject.transform.position.y);
-            var tilePos = new Vector3Int(tilePosX, tilePosY, 0);
-            tileMap = gameObject.GetComponentInParent<Tilemap>();
-            var floorTile = ScriptableObject.CreateInstance<Tile>();
-            floorTile.gameObject = Globals.prefab_4WD[Random.Range(0, Globals.prefab_4WD.Length)];
-            tileMap.SetTile(tilePos, floorTile);
 
-            for (int x = -1; x <= 1; x++)
-            {
-                for (int y = -1; y <= 1; y++)
-                {
-                    CheckTileInDirection(tilePosX, tilePosY, x, y);
-                }
-            }
         }
 
     }
@@ -85,22 +56,6 @@ public class WallController : MonoBehaviour {
         if (offsetY < -1)
             return "";
 
-        var dirTileCur = tileMap.GetTile(new Vector3Int(tilePosX + offsetX, tilePosY + offsetY, 0));
-        if (dirTileCur.name == "8F(Clone)")
-        {
-            return "8F";
-        }
-        if (dirTileCur == null)
-        {
-            /*
-            GameObject[] dirWalls = Globals.GetDirectionName(offsetX, offsetY, out newName);
-
-            var newTile = ScriptableObject.CreateInstance<Tile>();
-            newTile.gameObject = dirWalls[Random.Range(0, dirWalls.Length)];
-            newTile.name = newName;
-            tileMap.SetTile(new Vector3Int(tilePosX + offsetX, tilePosY + offsetY, 0), newTile);
-            */
-        }
         return "";
     }
 

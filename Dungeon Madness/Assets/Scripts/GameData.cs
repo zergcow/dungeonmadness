@@ -18,7 +18,7 @@ namespace Assets.Scripts
     }
     enum WallTypes
     {
-        Basic = 0,
+        PlaceHolder = 0,
         Copper = 1,
         Iron = 2,
         Wood = 3,
@@ -50,5 +50,20 @@ namespace Assets.Scripts
         };
         public static Dictionary<Vector3, TileInfo> GameTiles;
 
+        public static void AddGameTile(Vector3 vector3, TileInfo tileInfo)
+        {
+            if (GameTiles == null)
+            {
+                GameTiles = new Dictionary<Vector3, TileInfo>();
+            }
+            if (GameData.GameTiles.ContainsKey(vector3))
+            {
+                GameData.GameTiles[vector3] = tileInfo;
+            }
+            else
+            {
+                GameData.GameTiles.Add(vector3, tileInfo);
+            }
+        }
     }
 }

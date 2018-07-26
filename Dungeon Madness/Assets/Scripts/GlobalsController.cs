@@ -23,10 +23,6 @@ public class GlobalsController : MonoBehaviour {
     public GameObject[] prefab_8S;
     void Awake()
     {
-        if (GameData.GameTiles == null)
-        {
-            GameData.GameTiles = new Dictionary<Vector3, TileInfo>();
-        }
         Globals.prefab_0T = this.prefab_0T;
         Globals.prefab_2CIC = this.prefab_2CIC;
         Globals.prefab_2FIC = this.prefab_2FIC;

@@ -64,23 +64,12 @@ public class TileMapController : MonoBehaviour {
                     Rotation = RotationStrings.Base,
                     TileBase = newTile,
                     TilemapMember = tileMap,
-                    ResourceType = WallTypes.Basic,
+                    ResourceType = WallTypes.PlaceHolder,
                     AnimatorName = "8F",
                     BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "8F" }
                     
                 };
-                if (GameData.GameTiles == null)
-                {
-                    GameData.GameTiles = new Dictionary<Vector3, TileInfo>();
-                }
-                if (GameData.GameTiles.ContainsKey(tilePos))
-                {
-                    GameData.GameTiles[tilePos] = tileData;
-                }
-                else
-                {
-                    GameData.GameTiles.Add(tilePos, tileData);
-                }
+                GameData.AddGameTile(tilePos, tileData);
             }
         }
         CreateWallsForRoom(roomWidth, roomHeight, maxX, maxY, minX, minY);
@@ -104,19 +93,12 @@ public class TileMapController : MonoBehaviour {
                 Rotation = RotationStrings.CounterClockwise,
                 TileBase = newTile,
                 TilemapMember = tileMap,
-                ResourceType = WallTypes.Basic,
+                ResourceType = WallTypes.PlaceHolder,
                 AnimatorName = "4W",
                 BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "4W" }
 
             };
-            if (GameData.GameTiles.ContainsKey(tilePos))
-            {
-                GameData.GameTiles[tilePos] = tileData;
-            }
-            else
-            {
-                GameData.GameTiles.Add(tilePos, tileData);
-            }
+            GameData.AddGameTile(tilePos, tileData);
         }
         /*
         for (int y = minY; y <= maxY; y++)

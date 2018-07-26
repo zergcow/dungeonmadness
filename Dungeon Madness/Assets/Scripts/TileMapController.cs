@@ -71,7 +71,14 @@ public class TileMapController : MonoBehaviour {
                 {
                     GameData.GameTiles = new Dictionary<Vector3, TileInfo>();
                 }
-                GameData.GameTiles.Add(tilePos, tileData);
+                if (GameData.GameTiles.ContainsKey(tilePos))
+                {
+                    GameData.GameTiles[tilePos] = tileData;
+                }
+                else
+                {
+                    GameData.GameTiles.Add(tilePos, tileData);
+                }
             }
         }
         CreateWallsForRoom(roomWidth, roomHeight, maxX, maxY, minX, minY);
@@ -98,7 +105,14 @@ public class TileMapController : MonoBehaviour {
                 BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "4W" }
 
             };
-            GameData.GameTiles.Add(tilePos, tileData);
+            if (GameData.GameTiles.ContainsKey(tilePos))
+            {
+                GameData.GameTiles[tilePos] = tileData;
+            }
+            else
+            {
+                GameData.GameTiles.Add(tilePos, tileData);
+            }
         }
         /*
         for (int y = minY; y <= maxY; y++)

@@ -18,7 +18,11 @@ public class WallController : MonoBehaviour {
     {
         tileMap = gameObject.GetComponentInParent<Tilemap>();
         TileInfo curTile = GameData.GameTiles[transform.localPosition];
-        transform.Rotate(curTile.Rotation);
+
+        Animator tileAni = GetComponent<Animator>();
+        tileAni.StartPlayback();
+        tileAni.playbackTime = 1f;
+        //transform.Rotate(curTile.Rotation);
 
     }
     private void OnMouseDown()

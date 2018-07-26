@@ -20,11 +20,13 @@ public class WallController : MonoBehaviour {
         if (GameData.GameTiles.ContainsKey(transform.localPosition))
         {
             TileInfo curTile = GameData.GameTiles[transform.localPosition];
+            
 
             Animator tileAni = gameObject.GetComponent<Animator>();
             tileAni.StartPlayback();
             tileAni.PlayInFixedTime(currentAnimationName(tileAni), 0, (float)curTile.ResourceType / (float)10);
-            //transform.Rotate(curTile.Rotation);
+            transform.SetPositionAndRotation(curTile.LocalPlace, Quaternion.Euler(curTile.Rotation));
+            gameObject.transform.Rotate(curTile.Rotation);
         }
     }
 

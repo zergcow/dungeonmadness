@@ -56,13 +56,13 @@ namespace Assets.Scripts
             {
                 GameTiles = new Dictionary<Vector3, TileInfo>();
             }
-            if (GameData.GameTiles.ContainsKey(vector3))
+            if (GameTiles.ContainsKey(vector3))
             {
-                GameData.GameTiles[vector3] = tileInfo;
+                GameTiles[vector3] = tileInfo;
             }
             else
             {
-                GameData.GameTiles.Add(vector3, tileInfo);
+                GameTiles.Add(vector3, tileInfo);
             }
         }
     }

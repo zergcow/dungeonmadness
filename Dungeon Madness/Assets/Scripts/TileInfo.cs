@@ -5,8 +5,6 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Assets.Scripts
-{
     class TileInfo
     {
         public Vector3Int LocalPlace { get; set; }
@@ -23,6 +21,8 @@ namespace Assets.Scripts
 
         public RotationStrings Rotation { get; set; }
 
+        public bool Flipped { get; set; }
+
         public WallTypes ResourceType { get; set; }
     }
-}
+

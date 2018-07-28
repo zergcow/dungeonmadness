@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Assets.Scripts;
+using System;
 
 public class TileMapController : MonoBehaviour {
     
@@ -26,53 +26,62 @@ public class TileMapController : MonoBehaviour {
 
     private void CreateRoom(int roomWidth, int roomHeight, int offsetX, int offsetY)
     {
-        int maxX = offsetX;
-        int maxY = offsetY;
-        int minX = offsetX;
-        int minY = offsetY;
-        for (int x = 0; x < roomWidth; x++)
+        try
         {
-            int tileX = offsetX + x;
-            if (maxX < tileX)
-            {
-                maxX = tileX;
-            }
-            if (minX > tileX)
-            {
-                minX = tileX;
-            }
-            for (int y = 0; y < roomHeight; y++)
-            {
-                int tileY = offsetY + y;
-                if (maxY < tileY)
-                {
-                    maxY = tileY;
-                }
-                if (minY > tileY)
-                {
-                    minY = tileY;
-                }
-                var newTile = ScriptableObject.CreateInstance<Tile>();
-                Vector3Int tilePos = new Vector3Int(tileX, tileY, 0);
 
-                newTile.gameObject = Globals.prefab_8F[Random.Range(0, Globals.prefab_8F.Length)];
-                tileMap.SetTile(tilePos, newTile);
-                var tileData = new TileInfo
+            int maxX = offsetX;
+            int maxY = offsetY;
+            int minX = offsetX;
+            int minY = offsetY;
+            for (int x = 0; x < roomWidth; x++)
+            {
+                int tileX = offsetX + x;
+                if (maxX < tileX)
                 {
-                    LocalPlace = tilePos,
-                    WorldLocation = tileMap.CellToWorld(tilePos),
-                    Rotation = RotationStrings.Base,
-                    TileBase = newTile,
-                    TilemapMember = tileMap,
-                    ResourceType = WallTypes.PlaceHolder,
-                    AnimatorName = "8F",
-                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "8F" }
-                    
-                };
-                GameData.AddGameTile(tilePos, tileData);
+                    maxX = tileX;
+                }
+                if (minX > tileX)
+                {
+                    minX = tileX;
+                }
+                for (int y = 0; y < roomHeight; y++)
+                {
+                    int tileY = offsetY + y;
+                    if (maxY < tileY)
+                    {
+                        maxY = tileY;
+                    }
+                    if (minY > tileY)
+                    {
+                        minY = tileY;
+                    }
+                    var newTile = ScriptableObject.CreateInstance<Tile>();
+                    Vector3Int tilePos = new Vector3Int(tileX, tileY, 0);
+
+                    newTile.gameObject = Globals.prefab_8F;
+                    tileMap.SetTile(tilePos, newTile);
+                    var tileData = new TileInfo
+                    {
+                        LocalPlace = tilePos,
+                        WorldLocation = tileMap.CellToWorld(tilePos),
+                        Rotation = RotationStrings.Base,
+                        Flipped = false,
+                        TileBase = newTile,
+                        TilemapMember = tileMap,
+                        ResourceType = WallTypes.PlaceHolder,
+                        AnimatorName = "8F",
+                        BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "8F" }
+
+                    };
+                    GameData.AddGameTile(tilePos, tileData);
+                }
             }
+            CreateWallsForRoom(roomWidth, roomHeight, maxX, maxY, minX, minY);
         }
-        CreateWallsForRoom(roomWidth, roomHeight, maxX, maxY, minX, minY);
+        catch (Exception ex)
+        {
+            Debug.LogError(ex);
+        }
     }
 
     private void CreateWallsForRoom(int roomWidth, int roomHeight, int maxX, int maxY, int minX, int minY)
@@ -80,49 +89,30 @@ public class TileMapController : MonoBehaviour {
 
         for (int y = minY; y <= maxY; y++)
         {
-            var newTile = ScriptableObject.CreateInstance<Tile>();
-            
-            GameObject prefab = Globals.prefab_4W[Random.Range(0, Globals.prefab_4W.Length)];
-            newTile.gameObject = prefab;
+            Vector3Int findPos = new Vector3Int(maxX + 1, y, 0);
             Vector3Int tilePos = new Vector3Int(maxX, y, 0);
-            tileMap.SetTile(tilePos, newTile);
-            var tileData = new TileInfo
-            {
-                LocalPlace = tilePos,
-                WorldLocation = tileMap.CellToWorld(tilePos),
-                Rotation = RotationStrings.CounterClockwise,
-                TileBase = newTile,
-                TilemapMember = tileMap,
-                ResourceType = WallTypes.PlaceHolder,
-                AnimatorName = "4W",
-                BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "4W" }
-
-            };
-            GameData.AddGameTile(tilePos, tileData);
+            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_4W);
         }
-        /*
         for (int y = minY; y <= maxY; y++)
         {
-            var westTile = ScriptableObject.CreateInstance<Tile>();
-            westTile.gameObject = Globals.WWalls[Random.Range(0, Globals.WWalls.Length)];
-            westTile.name = "westWall";
-            tileMap.SetTile(new Vector3Int(minX, y, 0), westTile);
+            Vector3Int findPos = new Vector3Int(minX - 1, y, 0);
+            Vector3Int tilePos = new Vector3Int(minX, y, 0);
+            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_4W);
+        }
+        
+        for (int x = minX; x <= maxX; x++)
+        {
+            Vector3Int findPos = new Vector3Int(x, maxY + 1, 0);
+            Vector3Int tilePos = new Vector3Int(x, maxY, 0);
+            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_4W);
         }
         for (int x = minX; x <= maxX; x++)
         {
-            var northTile = ScriptableObject.CreateInstance<Tile>();
-            northTile.gameObject = Globals.NWalls[Random.Range(0, Globals.NWalls.Length)];
-            northTile.name = "northWall";
-            tileMap.SetTile(new Vector3Int(x, maxY, 0), northTile);
+            Vector3Int findPos = new Vector3Int(x, minY - 1, 0);
+            Vector3Int tilePos = new Vector3Int(x, minY, 0);
+            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_4W);
         }
-        for (int x = minX; x <= maxX; x++)
-        {
-            var southTile = ScriptableObject.CreateInstance<Tile>();
-            southTile.gameObject = Globals.SWalls[Random.Range(0, Globals.SWalls.Length)];
-            southTile.name = "southWall";
-            tileMap.SetTile(new Vector3Int(x, minY, 0), southTile);
-        }
-
+        /*
         var neTile = ScriptableObject.CreateInstance<Tile>();
         neTile.gameObject = Globals.NECorner[Random.Range(0, Globals.NECorner.Length)];
         neTile.name = "northEastWall";

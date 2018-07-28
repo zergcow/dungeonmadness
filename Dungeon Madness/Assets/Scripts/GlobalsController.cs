@@ -1,26 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts;
 
 public class GlobalsController : MonoBehaviour {
 
-    public GameObject[] prefab_0T;
-    public GameObject[] prefab_2CIC;
-    public GameObject[] prefab_2FIC;
-    public GameObject[] prefab_3IC;
-    public GameObject[] prefab_4ACIC;
-    public GameObject[] prefab_4CIC;
-    public GameObject[] prefab_4W;
-    public GameObject[] prefab_4WD;
-    public GameObject[] prefab_5OC;
-    public GameObject[] prefab_6CIC;
-    public GameObject[] prefab_6COC;
-    public GameObject[] prefab_6FOC;
-    public GameObject[] prefab_8F;
-    public GameObject[] prefab_8IC;
-    public GameObject[] prefab_8ICS;
-    public GameObject[] prefab_8S;
+    public GameObject prefab_0T;
+    public GameObject prefab_2CIC;
+    public GameObject prefab_2FIC;
+    public GameObject prefab_3IC;
+    public GameObject prefab_4ACIC;
+    public GameObject prefab_4CIC;
+    public GameObject prefab_4W;
+    public GameObject prefab_4WD;
+    public GameObject prefab_5OC;
+    public GameObject prefab_6CIC;
+    public GameObject prefab_6COC;
+    public GameObject prefab_6FOC;
+    public GameObject prefab_8F;
+    public GameObject prefab_8IC;
+    public GameObject prefab_8ICS;
+    public GameObject prefab_8S;
     void Awake()
     {
         Globals.prefab_0T = this.prefab_0T;

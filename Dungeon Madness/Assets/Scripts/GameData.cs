@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Assets.Scripts
-{
     enum EssenceTypes
     {
         None = 0,
@@ -37,24 +35,25 @@ namespace Assets.Scripts
     {
         Base = 0,
         CounterClockwise =1,
-        Flipped = 2,
+        UpsideDown = 2,
         Clockwise = 3
+        
     }
     static class GameData
     {
         public static Dictionary<RotationStrings, Vector3> RotationTypes = new Dictionary<RotationStrings, Vector3> {
             { RotationStrings.Base, new Vector3(0, 0, 0) },
             { RotationStrings.CounterClockwise, new Vector3(0, 0, -90) },
-            { RotationStrings.Flipped, new Vector3(0, 0, 180) },
+            { RotationStrings.UpsideDown, new Vector3(0, 0, 180) },
             { RotationStrings.Clockwise, new Vector3(0, 0, 90) }
         };
-        public static Dictionary<Vector3, TileInfo> GameTiles;
+        public static Dictionary<Vector3Int, TileInfo> GameTiles;
 
-        public static void AddGameTile(Vector3 vector3, TileInfo tileInfo)
+        public static void AddGameTile(Vector3Int vector3, TileInfo tileInfo)
         {
             if (GameTiles == null)
             {
-                GameTiles = new Dictionary<Vector3, TileInfo>();
+                GameTiles = new Dictionary<Vector3Int, TileInfo>();
             }
             if (GameTiles.ContainsKey(vector3))
             {
@@ -66,4 +65,4 @@ namespace Assets.Scripts
             }
         }
     }
-}
+

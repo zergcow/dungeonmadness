@@ -22,31 +22,6 @@ static class Globals {
     public static GameObject prefab_8ICS;
     public static GameObject prefab_8S;
 
-    public static void SetNewWall(Tilemap tileMap, Vector3Int tilePos, Vector3Int findPos, GameObject newTileObject, bool needsflipped = false)
-    {
-        var newTile = ScriptableObject.CreateInstance<Tile>();
-        Vector3Int newPos = Vector3Int.RoundToInt(findPos);
-
-        newTile.gameObject = newTileObject;
-        tileMap.SetTile(newPos, newTile);
-        RotationStrings rotStr = (RotationStrings)DetermineTileDirection(tilePos.x, tilePos.y, findPos.x, findPos.y);
-        var tileData = new TileInfo
-        {
-            LocalPlace = newPos,
-            WorldLocation = tileMap.CellToWorld(newPos),
-            Rotation = rotStr,
-            Flipped = needsflipped,
-            TileBase = newTile,
-            TilemapMember = tileMap,
-            ResourceType = WallTypes.PlaceHolder,
-            AnimatorName = newTileObject.name,
-            BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = newTileObject.name }
-
-        };
-        GameData.AddGameTile(newPos, tileData);
-    }
-
-
     public static int DetermineTileDirection(int fromX, int fromY, int x, int y)
     {
         RotationStrings ret = RotationStrings.Base;

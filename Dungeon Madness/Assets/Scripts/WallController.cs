@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-public class WallController : MonoBehaviour {
+public class WallController : MonoBehaviour
+{
 
     private Tilemap tileMap;
     public int hp = 5;
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake()
+    {
     }
     void Start()
     {
@@ -66,138 +68,352 @@ public class WallController : MonoBehaviour {
                 TileBase = newTile,
                 TilemapMember = tileMap,
                 ResourceType = WallTypes.PlaceHolder,
+                FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Up, FloorFullFacing.Down, FloorFullFacing.Left, FloorFullFacing.Right },
+                FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.UpLeft, FloorCornerFacing.UpRight, FloorCornerFacing.DownLeft, FloorCornerFacing.DownRight },
                 AnimatorName = "8F",
                 BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "8F" }
 
             };
             GameData.AddGameTile(tilePos, tileData);
-            for (int x = -1; x <= 1; x++)  //order x=-1/y=-1|y=0|y=+1  x=0/y=-1|y=0|y=+1  x=+1/y=-1|y=0|y=+1
-            {
-                for (int y = -1; y <= 1; y++)
-                {
-                    SetTileInDirection(tilePos, x, y);
-                }
-            }
+
+
+            CreateNewWall(tilePos, new Vector3Int(tilePos.x, tilePos.y + 1, 0));
+            CreateNewWall(tilePos, new Vector3Int(tilePos.x + 1, tilePos.y + 1, 0));
+            //CreateNewWall(tilePos, new Vector3Int(tilePos.x, tilePos.y - 1, 0));
+            //CreateNewWall(tilePos, new Vector3Int(tilePos.x + 1, tilePos.y, 0));
+            //CreateNewWall(tilePos, new Vector3Int(tilePos.x - 1, tilePos.y, 0));
         }
 
     }
-    private void GetTileInDirection(int x, int y, Vector3Int findPos, ref TileInfo checkTilePlus, ref TileInfo checkTileMinus)
+    private void CreateNewWall(Vector3Int fromWallDir, Vector3Int newWallDir)
     {
+        Vector3Int upWallDir = new Vector3Int(newWallDir.x, newWallDir.y + 1, 0);
+        Vector3Int downWallDir = new Vector3Int(newWallDir.x, newWallDir.y - 1, 0);
+        Vector3Int rightWallDir = new Vector3Int(newWallDir.x + 1, newWallDir.y, 0);
+        Vector3Int leftWallDir = new Vector3Int(newWallDir.x - 1, newWallDir.y, 0);
+        TileInfo newWall = null;
+        TileInfo fromWall = null;
+        TileInfo upWall = null;
+        TileInfo downWall = null;
+        TileInfo rightWall = null;
+        TileInfo leftWall = null;
 
-        Vector3Int checkTilePlusPos;
-        Vector3Int checkTilePlusMinus;
-        if (x == 0)
+        if (GameData.GameTiles.ContainsKey(newWallDir))
         {
-            checkTilePlusPos = new Vector3Int(findPos.x + 1, findPos.y, 0);
-            checkTilePlusMinus = new Vector3Int(findPos.x - 1, findPos.y, 0);
-            if (GameData.GameTiles.ContainsKey(checkTilePlusPos))
+            newWall = GameData.GameTiles[newWallDir];
+        }
+        // Get TileInfo in cardinal directions
+        if (fromWallDir == upWallDir)
+        {
+            if (GameData.GameTiles.ContainsKey(fromWallDir))
             {
-                checkTilePlus = GameData.GameTiles[checkTilePlusPos];
+                fromWall = GameData.GameTiles[fromWallDir];
+                upWall = fromWall;
             }
-            if (GameData.GameTiles.ContainsKey(checkTilePlusMinus))
+            if (GameData.GameTiles.ContainsKey(downWallDir))
             {
-                checkTileMinus = GameData.GameTiles[checkTilePlusMinus];
+                downWall = GameData.GameTiles[downWallDir];
+            }
+            if (GameData.GameTiles.ContainsKey(rightWallDir))
+            {
+                rightWall = GameData.GameTiles[rightWallDir];
+            }
+            if (GameData.GameTiles.ContainsKey(leftWallDir))
+            {
+                leftWall = GameData.GameTiles[leftWallDir];
             }
         }
-        else if (y == 0)
+        else if (fromWallDir == downWallDir)
         {
-            checkTilePlusPos = new Vector3Int(findPos.x, findPos.y + 1, 0);
-            checkTilePlusMinus = new Vector3Int(findPos.x, findPos.y - 1, 0);
-            if (GameData.GameTiles.ContainsKey(checkTilePlusPos))
+            if (GameData.GameTiles.ContainsKey(fromWallDir))
             {
-                checkTilePlus = GameData.GameTiles[checkTilePlusPos];
+                fromWall = GameData.GameTiles[fromWallDir];
+                downWall = fromWall;
             }
-            if (GameData.GameTiles.ContainsKey(checkTilePlusMinus))
+            if (GameData.GameTiles.ContainsKey(upWallDir))
             {
-                checkTileMinus = GameData.GameTiles[checkTilePlusMinus];
+                upWall = GameData.GameTiles[upWallDir];
             }
+            if (GameData.GameTiles.ContainsKey(rightWallDir))
+            {
+                rightWall = GameData.GameTiles[rightWallDir];
+            }
+            if (GameData.GameTiles.ContainsKey(leftWallDir))
+            {
+                leftWall = GameData.GameTiles[leftWallDir];
+            }
+        }
+        else if (fromWallDir == rightWallDir)
+        {
+            if (GameData.GameTiles.ContainsKey(fromWallDir))
+            {
+                fromWall = GameData.GameTiles[fromWallDir];
+                rightWall = fromWall;
+            }
+            if (GameData.GameTiles.ContainsKey(upWallDir))
+            {
+                upWall = GameData.GameTiles[upWallDir];
+            }
+            if (GameData.GameTiles.ContainsKey(downWallDir))
+            {
+                downWall = GameData.GameTiles[downWallDir];
+            }
+            if (GameData.GameTiles.ContainsKey(leftWallDir))
+            {
+                leftWall = GameData.GameTiles[leftWallDir];
+            }
+        }
+        else if (fromWallDir == leftWallDir)
+        {
+            if (GameData.GameTiles.ContainsKey(fromWallDir))
+            {
+                fromWall = GameData.GameTiles[fromWallDir];
+                leftWall = fromWall;
+            }
+            if (GameData.GameTiles.ContainsKey(upWallDir))
+            {
+                upWall = GameData.GameTiles[upWallDir];
+            }
+            if (GameData.GameTiles.ContainsKey(downWallDir))
+            {
+                downWall = GameData.GameTiles[downWallDir];
+            }
+            if (GameData.GameTiles.ContainsKey(rightWallDir))
+            {
+                rightWall = GameData.GameTiles[rightWallDir];
+            }
+        }
+        bool upWallSide = true;
+        bool downWallSide = true;
+        bool leftWallSide = true;
+        bool rightWallSide = true;
+
+        if (upWall == null)
+        {
+            upWallSide = true;
+        }
+        else
+        {
+            foreach (FloorFullFacing f in upWall.FloorFullFacings)
+            {
+                if (f == FloorFullFacing.Up)
+                {
+                    upWallSide = false;
+                }
+            }
+            foreach (FloorCornerFacing f in upWall.FloorCornerFacings)
+            {
+                if (f == FloorCornerFacing.UpLeft || f == FloorCornerFacing.UpRight)
+                {
+                    upWallSide = false;
+                }
+            }
+        }
+        if (downWall == null)
+        {
+            downWallSide = true;
+        }
+        else
+        {
+            foreach (FloorFullFacing f in downWall.FloorFullFacings)
+            {
+                if (f == FloorFullFacing.Down)
+                {
+                    downWallSide = false;
+                }
+            }
+            foreach (FloorCornerFacing f in downWall.FloorCornerFacings)
+            {
+                if (f == FloorCornerFacing.DownLeft || f == FloorCornerFacing.DownRight)
+                {
+                    downWallSide = false;
+                }
+            }
+        }
+        if (leftWall == null)
+        {
+            leftWallSide = true;
+        }
+        else
+        {
+            foreach (FloorFullFacing f in leftWall.FloorFullFacings)
+            {
+                if (f == FloorFullFacing.Left)
+                {
+                    leftWallSide = false;
+                }
+            }
+            foreach (FloorCornerFacing f in leftWall.FloorCornerFacings)
+            {
+                if (f == FloorCornerFacing.UpLeft || f == FloorCornerFacing.DownLeft)
+                {
+                    leftWallSide = false;
+                }
+            }
+        }
+        if (rightWall == null)
+        {
+            rightWallSide = true;
+        }
+        else
+        {
+            foreach (FloorFullFacing f in rightWall.FloorFullFacings)
+            {
+                if (f == FloorFullFacing.Right)
+                {
+                    rightWallSide = false;
+                }
+            }
+            foreach (FloorCornerFacing f in rightWall.FloorCornerFacings)
+            {
+                if (f == FloorCornerFacing.UpRight || f == FloorCornerFacing.DownRight)
+                {
+                    rightWallSide = false;
+                }
+            }
+        }
+
+
+
+        if (upWallSide && leftWallSide && rightWallSide && (!downWallSide)) 
+        {
+            var newTile = ScriptableObject.CreateInstance<Tile>();
+
+            newTile.gameObject = Globals.prefab_2FIC;
+            tileMap.SetTile(newWallDir, newTile);
+            var tileData = new TileInfo
+            {
+                LocalPlace = newWallDir,
+                WorldLocation = tileMap.CellToWorld(newWallDir),
+                Rotation = RotationStrings.Base,
+                Flipped = false,
+                TileBase = newTile,
+                TilemapMember = tileMap,
+                ResourceType = WallTypes.PlaceHolder,
+                FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Down },
+                FloorCornerFacings = new FloorCornerFacing[] { },
+                AnimatorName = Globals.prefab_2CIC.name,
+                BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_2CIC.name }
+
+            };
+            GameData.AddGameTile(newWallDir, tileData);
+        }  // Replace with 2FIC
+        else if (downWallSide && leftWallSide && rightWallSide && (!upWallSide)) 
+        {
+            var newTile = ScriptableObject.CreateInstance<Tile>();
+
+            newTile.gameObject = Globals.prefab_2FIC;
+            tileMap.SetTile(newWallDir, newTile);
+            var tileData = new TileInfo
+            {
+                LocalPlace = newWallDir,
+                WorldLocation = tileMap.CellToWorld(newWallDir),
+                Rotation = RotationStrings.UpsideDown,
+                Flipped = false,
+                TileBase = newTile,
+                TilemapMember = tileMap,
+                ResourceType = WallTypes.PlaceHolder,
+                FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Up },
+                FloorCornerFacings = new FloorCornerFacing[] { },
+                AnimatorName = Globals.prefab_2CIC.name,
+                BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_2CIC.name }
+
+            };
+            GameData.AddGameTile(newWallDir, tileData);
+        }  // Replace with 2FIC
+        else if (downWallSide && upWallSide && rightWallSide && (!leftWallSide))
+        {
+            var newTile = ScriptableObject.CreateInstance<Tile>();
+
+            newTile.gameObject = Globals.prefab_2FIC;
+            tileMap.SetTile(newWallDir, newTile);
+            var tileData = new TileInfo
+            {
+                LocalPlace = newWallDir,
+                WorldLocation = tileMap.CellToWorld(newWallDir),
+                Rotation = RotationStrings.CounterClockwise,
+                Flipped = false,
+                TileBase = newTile,
+                TilemapMember = tileMap,
+                ResourceType = WallTypes.PlaceHolder,
+                FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Left },
+                FloorCornerFacings = new FloorCornerFacing[] { },
+                AnimatorName = Globals.prefab_2CIC.name,
+                BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_2CIC.name }
+
+            };
+            GameData.AddGameTile(newWallDir, tileData);
+        }  // Replace with 2FIC
+        else if (downWallSide && upWallSide && leftWallSide && (!rightWallSide))
+        {
+            var newTile = ScriptableObject.CreateInstance<Tile>();
+
+            newTile.gameObject = Globals.prefab_2FIC;
+            tileMap.SetTile(newWallDir, newTile);
+            var tileData = new TileInfo
+            {
+                LocalPlace = newWallDir,
+                WorldLocation = tileMap.CellToWorld(newWallDir),
+                Rotation = RotationStrings.Clockwise,
+                Flipped = false,
+                TileBase = newTile,
+                TilemapMember = tileMap,
+                ResourceType = WallTypes.PlaceHolder,
+                FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Right },
+                FloorCornerFacings = new FloorCornerFacing[] { },
+                AnimatorName = Globals.prefab_2CIC.name,
+                BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_2CIC.name }
+
+            };
+            GameData.AddGameTile(newWallDir, tileData);
+        }  // Replace with 2FIC
+        else if ((upWallSide && leftWallSide) && (!rightWallSide && !downWallSide))
+        {
+            var newTile = ScriptableObject.CreateInstance<Tile>();
+
+            newTile.gameObject = Globals.prefab_3IC;
+            tileMap.SetTile(newWallDir, newTile);
+            var tileData = new TileInfo
+            {
+                LocalPlace = newWallDir,
+                WorldLocation = tileMap.CellToWorld(newWallDir),
+                Rotation = RotationStrings.Base,
+                Flipped = false,
+                TileBase = newTile,
+                TilemapMember = tileMap,
+                ResourceType = WallTypes.PlaceHolder,
+                FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Down },
+                FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.DownRight },
+                AnimatorName = Globals.prefab_3IC.name,
+                BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_3IC.name }
+
+            };
+            GameData.AddGameTile(newWallDir, tileData);
+        }
+        else if (upWallSide && rightWallSide && (!leftWallSide && !downWallSide))
+        {
+            var newTile = ScriptableObject.CreateInstance<Tile>();
+
+            newTile.gameObject = Globals.prefab_3IC;
+            tileMap.SetTile(newWallDir, newTile);
+            var tileData = new TileInfo
+            {
+                LocalPlace = newWallDir,
+                WorldLocation = tileMap.CellToWorld(newWallDir),
+                Rotation = RotationStrings.Base,
+                Flipped = true,
+                TileBase = newTile,
+                TilemapMember = tileMap,
+                ResourceType = WallTypes.PlaceHolder,
+                FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Down },
+                FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.DownLeft },
+                AnimatorName = Globals.prefab_3IC.name,
+                BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_3IC.name }
+
+            };
+            GameData.AddGameTile(newWallDir, tileData);
         }
     }
-    private void SetTileInDirection(Vector3Int tilePos, int x, int y)
-    {
-        Vector3Int findPos = new Vector3Int(tilePos.x + x, tilePos.y + y, 0);
-        TileInfo ti = null;
-        if (GameData.GameTiles.ContainsKey(findPos))
-        {
-            ti = GameData.GameTiles[findPos];
-        }
-        if (ti == null)  // New Cell
-        {
-            if ((x == 0) || (y == 0)) // Cardinal directions only
-            {
-                TileInfo checkTilePlus = null;
-                TileInfo checkTileMinus = null;
-
-                GetTileInDirection(x, y, findPos, ref checkTilePlus, ref checkTileMinus);
-                if (checkTilePlus == null && checkTileMinus == null)  // surrounded by no tiles
-                {
-                    Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_2FIC);
-                }
-                else if (checkTilePlus != null && checkTileMinus != null)
-                {
-                    // each side has some kind of tile
-                }
-                else if (checkTilePlus != null && checkTileMinus == null)
-                {
-                    GetTileInDirection(x, y, checkTilePlus.LocalPlace, ref checkTilePlus, ref checkTileMinus);
-                    if (x == 0)
-                    {
-                        if (checkTilePlus == null) 
-                        {
-                            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_3IC, y == 1 ? true : false);
-                        }
-                        else if (checkTileMinus == null)
-                        {
-                            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_3IC, y == 1 ? false : true);
-                        }
-                    }
-                    else if (y == 0)
-                    {
-                        if (checkTilePlus == null) 
-                        {
-                            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_3IC, x == 1 ? false : true);
-                        }
-                        else if (checkTileMinus == null)
-                        {
-                            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_3IC, x == 1 ? true : false);
-                        }
-                    }
-                }
-                else if (checkTilePlus == null && checkTileMinus != null)
-                {
-                    GetTileInDirection(x, y, checkTileMinus.LocalPlace, ref checkTilePlus, ref checkTileMinus);
-                    if (x == 0)
-                    {
-                        if (checkTilePlus == null)  
-                        {
-                            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_3IC, y == 1 ? true : false);
-                        }
-                        else if (checkTileMinus == null)
-                        {
-                            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_3IC, y == 1 ? false : true);
-                        }
-                    }
-                    else if (y == 0)
-                    {
-                        if (checkTilePlus == null) 
-                        {
-                            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_3IC, x == 1 ? false : true);
-                        }
-                        else if (checkTileMinus == null)
-                        {
-                            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_3IC, x == 1 ? true : false);
-                        }
-                    }
-                }
-            }
-        }
-        else if (ti.AnimatorName == "4W")
-        {
-            /*
-                Determine Direction of new and set new rotation/flip      
-             */
-        }
-    }
-
-
 }
+
+

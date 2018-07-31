@@ -39,6 +39,20 @@ using UnityEngine;
         Clockwise = 3
         
     }
+    enum FloorFullFacing
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
+    enum FloorCornerFacing
+    {
+        UpLeft,
+        UpRight,
+        DownLeft,
+        DownRight
+    }
     static class GameData
     {
         public static Dictionary<RotationStrings, Vector3> RotationTypes = new Dictionary<RotationStrings, Vector3> {

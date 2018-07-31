@@ -20,8 +20,6 @@ public class TileMapController : MonoBehaviour {
         int offsetY = -3; //set sw corner room start
 
         CreateRoom(roomWidth, roomHeight, offsetX, offsetY);
-
-        
     }
 
     private void CreateRoom(int roomWidth, int roomHeight, int offsetX, int offsetY)
@@ -69,6 +67,8 @@ public class TileMapController : MonoBehaviour {
                         TileBase = newTile,
                         TilemapMember = tileMap,
                         ResourceType = WallTypes.PlaceHolder,
+                        FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Up, FloorFullFacing.Down, FloorFullFacing.Left, FloorFullFacing.Right },
+                        FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.UpLeft, FloorCornerFacing.UpRight, FloorCornerFacing.DownLeft, FloorCornerFacing.DownRight },
                         AnimatorName = "8F",
                         BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = "8F" }
 
@@ -86,49 +86,302 @@ public class TileMapController : MonoBehaviour {
 
     private void CreateWallsForRoom(int roomWidth, int roomHeight, int maxX, int maxY, int minX, int minY)
     {
-
         for (int y = minY; y <= maxY; y++)
         {
             Vector3Int findPos = new Vector3Int(maxX + 1, y, 0);
             Vector3Int tilePos = new Vector3Int(maxX, y, 0);
-            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_4W);
+            if (y == minY)
+            {
+                var newTile = ScriptableObject.CreateInstance<Tile>();
+                Vector3Int newPos = Vector3Int.RoundToInt(findPos);
+                newTile.gameObject = Globals.prefab_3IC;
+                tileMap.SetTile(newPos, newTile);
+                var tileData = new TileInfo
+                {
+                    LocalPlace = newPos,
+                    WorldLocation = tileMap.CellToWorld(newPos),
+                    Rotation = RotationStrings.CounterClockwise,
+                    Flipped = true,
+                    TileBase = newTile,
+                    TilemapMember = tileMap,
+                    ResourceType = WallTypes.PlaceHolder,
+                    FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Left },
+                    FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.UpLeft },
+                    AnimatorName = Globals.prefab_3IC.name,
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_3IC.name }
+
+                };
+                GameData.AddGameTile(newPos, tileData);
+            }
+            else if (y == maxY)
+            {
+                var newTile = ScriptableObject.CreateInstance<Tile>();
+                Vector3Int newPos = Vector3Int.RoundToInt(findPos);
+                newTile.gameObject = Globals.prefab_3IC;
+                tileMap.SetTile(newPos, newTile);
+                var tileData = new TileInfo
+                {
+                    LocalPlace = newPos,
+                    WorldLocation = tileMap.CellToWorld(newPos),
+                    Rotation = RotationStrings.CounterClockwise,
+                    Flipped = false,
+                    TileBase = newTile,
+                    TilemapMember = tileMap,
+                    ResourceType = WallTypes.PlaceHolder,
+                    FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Left },
+                    FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.DownLeft },
+                    AnimatorName = Globals.prefab_3IC.name,
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_3IC.name }
+
+                };
+                GameData.AddGameTile(newPos, tileData);
+            }
+            else
+            {
+                var newTile = ScriptableObject.CreateInstance<Tile>();
+                Vector3Int newPos = Vector3Int.RoundToInt(findPos);
+                newTile.gameObject = Globals.prefab_4W;
+                tileMap.SetTile(newPos, newTile);
+                var tileData = new TileInfo
+                {
+                    LocalPlace = newPos,
+                    WorldLocation = tileMap.CellToWorld(newPos),
+                    Rotation = RotationStrings.CounterClockwise,
+                    Flipped = false,
+                    TileBase = newTile,
+                    TilemapMember = tileMap,
+                    ResourceType = WallTypes.PlaceHolder,
+                    FloorFullFacings = new FloorFullFacing[] {  FloorFullFacing.Left },
+                    FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.UpLeft, FloorCornerFacing.DownLeft },
+                    AnimatorName = Globals.prefab_4W.name,
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_4W.name }
+
+                };
+                GameData.AddGameTile(newPos, tileData);
+            }
         }
         for (int y = minY; y <= maxY; y++)
         {
             Vector3Int findPos = new Vector3Int(minX - 1, y, 0);
             Vector3Int tilePos = new Vector3Int(minX, y, 0);
-            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_4W);
+            if (y == minY)
+            {
+                var newTile = ScriptableObject.CreateInstance<Tile>();
+                Vector3Int newPos = Vector3Int.RoundToInt(findPos);
+                newTile.gameObject = Globals.prefab_3IC;
+                tileMap.SetTile(newPos, newTile);
+                var tileData = new TileInfo
+                {
+                    LocalPlace = newPos,
+                    WorldLocation = tileMap.CellToWorld(newPos),
+                    Rotation = RotationStrings.Clockwise,
+                    Flipped = false,
+                    TileBase = newTile,
+                    TilemapMember = tileMap,
+                    ResourceType = WallTypes.PlaceHolder,
+                    FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Right },
+                    FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.UpLeft },
+                    AnimatorName = Globals.prefab_3IC.name,
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_3IC.name }
+
+                };
+                GameData.AddGameTile(newPos, tileData);
+            }
+            else if (y == maxY)
+            {
+                var newTile = ScriptableObject.CreateInstance<Tile>();
+                Vector3Int newPos = Vector3Int.RoundToInt(findPos);
+                newTile.gameObject = Globals.prefab_3IC;
+                tileMap.SetTile(newPos, newTile);
+                var tileData = new TileInfo
+                {
+                    LocalPlace = newPos,
+                    WorldLocation = tileMap.CellToWorld(newPos),
+                    Rotation = RotationStrings.Clockwise,
+                    Flipped = true,
+                    TileBase = newTile,
+                    TilemapMember = tileMap,
+                    ResourceType = WallTypes.PlaceHolder,
+                    FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Right },
+                    FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.DownRight },
+                    AnimatorName = Globals.prefab_3IC.name,
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_3IC.name }
+
+                };
+                GameData.AddGameTile(newPos, tileData);
+            }
+            else
+            {
+                var newTile = ScriptableObject.CreateInstance<Tile>();
+                Vector3Int newPos = Vector3Int.RoundToInt(findPos);
+                newTile.gameObject = Globals.prefab_4W;
+                tileMap.SetTile(newPos, newTile);
+                var tileData = new TileInfo
+                {
+                    LocalPlace = newPos,
+                    WorldLocation = tileMap.CellToWorld(newPos),
+                    Rotation = RotationStrings.Clockwise,
+                    Flipped = false,
+                    TileBase = newTile,
+                    TilemapMember = tileMap,
+                    ResourceType = WallTypes.PlaceHolder,
+                    FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Right },
+                    FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.UpRight, FloorCornerFacing.DownRight },
+                    AnimatorName = Globals.prefab_4W.name,
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_4W.name }
+
+                };
+                GameData.AddGameTile(newPos, tileData);
+            }
         }
-        
+
         for (int x = minX; x <= maxX; x++)
         {
             Vector3Int findPos = new Vector3Int(x, maxY + 1, 0);
             Vector3Int tilePos = new Vector3Int(x, maxY, 0);
-            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_4W);
+            if (x == minX)
+            {
+                var newTile = ScriptableObject.CreateInstance<Tile>();
+                Vector3Int newPos = Vector3Int.RoundToInt(findPos);
+                newTile.gameObject = Globals.prefab_3IC;
+                tileMap.SetTile(newPos, newTile);
+                var tileData = new TileInfo
+                {
+                    LocalPlace = newPos,
+                    WorldLocation = tileMap.CellToWorld(newPos),
+                    Rotation = RotationStrings.Base,
+                    Flipped = false,
+                    TileBase = newTile,
+                    TilemapMember = tileMap,
+                    ResourceType = WallTypes.PlaceHolder,
+                    FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Down },
+                    FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.DownLeft },
+                    AnimatorName = Globals.prefab_3IC.name,
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_3IC.name }
+
+                };
+                GameData.AddGameTile(newPos, tileData);
+            }
+            else if (x == maxX)
+            {
+                var newTile = ScriptableObject.CreateInstance<Tile>();
+                Vector3Int newPos = Vector3Int.RoundToInt(findPos);
+                newTile.gameObject = Globals.prefab_3IC;
+                tileMap.SetTile(newPos, newTile);
+                var tileData = new TileInfo
+                {
+                    LocalPlace = newPos,
+                    WorldLocation = tileMap.CellToWorld(newPos),
+                    Rotation = RotationStrings.Base,
+                    Flipped = true,
+                    TileBase = newTile,
+                    TilemapMember = tileMap,
+                    ResourceType = WallTypes.PlaceHolder,
+                    FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Down },
+                    FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.DownRight },
+                    AnimatorName = Globals.prefab_3IC.name,
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_3IC.name }
+
+                };
+                GameData.AddGameTile(newPos, tileData);
+            }
+            else
+            {
+                var newTile = ScriptableObject.CreateInstance<Tile>();
+                Vector3Int newPos = Vector3Int.RoundToInt(findPos);
+                newTile.gameObject = Globals.prefab_4W;
+                tileMap.SetTile(newPos, newTile);
+                var tileData = new TileInfo
+                {
+                    LocalPlace = newPos,
+                    WorldLocation = tileMap.CellToWorld(newPos),
+                    Rotation = RotationStrings.Base,
+                    Flipped = false,
+                    TileBase = newTile,
+                    TilemapMember = tileMap,
+                    ResourceType = WallTypes.PlaceHolder,
+                    FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Down },
+                    FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.DownLeft, FloorCornerFacing.DownRight },
+                    AnimatorName = Globals.prefab_4W.name,
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_4W.name }
+
+                };
+                GameData.AddGameTile(newPos, tileData);
+            }
         }
         for (int x = minX; x <= maxX; x++)
         {
             Vector3Int findPos = new Vector3Int(x, minY - 1, 0);
             Vector3Int tilePos = new Vector3Int(x, minY, 0);
-            Globals.SetNewWall(tileMap, tilePos, findPos, Globals.prefab_4W);
+            if (x == minX)
+            {
+                var newTile = ScriptableObject.CreateInstance<Tile>();
+                Vector3Int newPos = Vector3Int.RoundToInt(findPos);
+                newTile.gameObject = Globals.prefab_3IC;
+                tileMap.SetTile(newPos, newTile);
+                var tileData = new TileInfo
+                {
+                    LocalPlace = newPos,
+                    WorldLocation = tileMap.CellToWorld(newPos),
+                    Rotation = RotationStrings.UpsideDown,
+                    Flipped = true,
+                    TileBase = newTile,
+                    TilemapMember = tileMap,
+                    ResourceType = WallTypes.PlaceHolder,
+                    FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Up },
+                    FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.UpLeft },
+                    AnimatorName = Globals.prefab_3IC.name,
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_3IC.name }
+
+                };
+                GameData.AddGameTile(newPos, tileData);
+            }
+            else if (x == maxX)
+            {
+                var newTile = ScriptableObject.CreateInstance<Tile>();
+                Vector3Int newPos = Vector3Int.RoundToInt(findPos);
+                newTile.gameObject = Globals.prefab_3IC;
+                tileMap.SetTile(newPos, newTile);
+                var tileData = new TileInfo
+                {
+                    LocalPlace = newPos,
+                    WorldLocation = tileMap.CellToWorld(newPos),
+                    Rotation = RotationStrings.UpsideDown,
+                    Flipped = false,
+                    TileBase = newTile,
+                    TilemapMember = tileMap,
+                    ResourceType = WallTypes.PlaceHolder,
+                    FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Up },
+                    FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.UpRight },
+                    AnimatorName = Globals.prefab_3IC.name,
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_3IC.name }
+
+                };
+                GameData.AddGameTile(newPos, tileData);
+            }
+            else
+            {
+                var newTile = ScriptableObject.CreateInstance<Tile>();
+                Vector3Int newPos = Vector3Int.RoundToInt(findPos);
+                newTile.gameObject = Globals.prefab_4W;
+                tileMap.SetTile(newPos, newTile);
+                var tileData = new TileInfo
+                {
+                    LocalPlace = newPos,
+                    WorldLocation = tileMap.CellToWorld(newPos),
+                    Rotation = RotationStrings.UpsideDown,
+                    Flipped = false,
+                    TileBase = newTile,
+                    TilemapMember = tileMap,
+                    ResourceType = WallTypes.PlaceHolder,
+                    FloorFullFacings = new FloorFullFacing[] { FloorFullFacing.Up },
+                    FloorCornerFacings = new FloorCornerFacing[] { FloorCornerFacing.UpLeft, FloorCornerFacing.UpRight },
+                    AnimatorName = Globals.prefab_4W.name,
+                    BaseObjectData = new BaseObjectData { Essence = new EssenceTypes[] { 0 }, EssenceAmount = 0, Name = Globals.prefab_4W.name }
+
+                };
+                GameData.AddGameTile(newPos, tileData);
+            }
         }
-        /*
-        var neTile = ScriptableObject.CreateInstance<Tile>();
-        neTile.gameObject = Globals.NECorner[Random.Range(0, Globals.NECorner.Length)];
-        neTile.name = "northEastWall";
-        tileMap.SetTile(new Vector3Int(maxX, maxY, 0), neTile);
-        var nwTile = ScriptableObject.CreateInstance<Tile>();
-        nwTile.gameObject = Globals.NWCorner[Random.Range(0, Globals.NWCorner.Length)];
-        nwTile.name = "northWestWall";
-        tileMap.SetTile(new Vector3Int(minX, maxY, 0), nwTile);
-        var seTile = ScriptableObject.CreateInstance<Tile>();
-        seTile.gameObject = Globals.SECorner[Random.Range(0, Globals.SECorner.Length)];
-        seTile.name = "southEastWall";
-        tileMap.SetTile(new Vector3Int(maxX, minY, 0), seTile);
-        var swTile = ScriptableObject.CreateInstance<Tile>();
-        swTile.gameObject = Globals.SWCorner[Random.Range(0, Globals.SWCorner.Length)];
-        swTile.name = "southWestWall";
-        tileMap.SetTile(new Vector3Int(minX, minY, 0), swTile);
-        */
     }
 }
